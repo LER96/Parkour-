@@ -14,6 +14,11 @@ public class PlayerFps : MonoBehaviour
     public float speed=5;
     public float moveMultiplier = 10;
 
+    [Header("MoveMode")]
+    [SerializeField] float walkSpeed = 4;
+    [SerializeField] float sprintSpeed = 6;
+    [SerializeField] float acceleration = 10;
+
     [Header("Drag Control")]
     public float groundDrag = 5;
     public float airDrag = 1.5f;
@@ -43,8 +48,20 @@ public class PlayerFps : MonoBehaviour
         }
         MyInput();
         ControlDrag();
-
+        ControlSpeed();
         slopeDir = Vector3.ProjectOnPlane(moveDir, slopeHit.normal);
+    }
+
+    private void ControlSpeed()
+    {
+        if(Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        {
+            speed = Mathf.Lerp(speed, sprintSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            speed = Mathf.Lerp(speed, walkSpeed, acceleration * Time.deltaTime);
+        }
     }
 
     bool OnSlope()
