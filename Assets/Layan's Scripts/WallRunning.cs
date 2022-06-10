@@ -9,7 +9,10 @@ public class WallRunning : MonoBehaviour
     public LayerMask whatIsGround;
     public float wallRunForce;
     public float maxWallRunTime;
-    private float _wallRunTimer;
+    public float wallJumpUpForce;
+    public float wallJumpSideForce;
+    private float _WallRunTimer;
+
 
     [Header("Inputs")]
     private float horizontalInput;
@@ -24,6 +27,12 @@ public class WallRunning : MonoBehaviour
     private bool _wallLeft;
     private bool _wallRight;
 
+    [Header("Exiting Wall")]
+    private bool _exitingWall;
+    public float exitingWallTime;
+    private float _exitingWallTimer;
+
+
     [Header("GameReferences")]
     public Transform orientation;
     private PlayerMovement _movementScript;
@@ -33,6 +42,20 @@ public class WallRunning : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _movementScript = GetComponent<PlayerMovement>();
+    }
+
+    private void Update()
+    {
+        CheckForWall();
+        WallRunningState();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_movementScript.wallRunning)
+        {
+            wallRunningMovement();
+        }
     }
 
     public void CheckForWall()
@@ -51,24 +74,88 @@ public class WallRunning : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if ((_wallLeft || _wallRight) && verticalInput > 0 && AbovGround())
+        if ((_wallLeft || _wallRight) && verticalInput > 0 && AbovGround() && !_exitingWall)
         {
+            if (!_movementScript.wallRunning)
+            {
+                startWallRun();
+            }
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                WallJump();
+            }
         }
+
+        else if (_exitingWall)
+        {
+            if (_movementScript.wallRunning)
+            {
+                StopWallRun();
+            }
+
+            if (_exitingWallTimer > 0)
+            {
+                _exitingWallTimer -= Time.deltaTime;
+            }
+
+            if (_exitingWallTimer <= 0)
+            {
+                _exitingWall = false;
+            }
+        }
+        else
+        {
+            if (_movementScript.wallRunning)
+            {
+                StopWallRun();
+            }
+        }
+        
     }
 
     private void startWallRun()
     {
-
+        _movementScript.wallRunning = true;
     }
 
     private void wallRunningMovement()
     {
+        _rb.useGravity = false;
+        _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
 
+        Vector3 wallNormal = _wallRight ? _rightWallHit.normal : _leftWallHit.normal;
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
+
+        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        {
+            wallForward = -wallForward;
+        }
+
+        _rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
+
+        if (!(_wallLeft && horizontalInput > 0) && !(_wallRight && horizontalInput < 0))
+        {
+
+        }
+        _rb.AddForce(-wallNormal * 100, ForceMode.Force);
     }
 
     private void StopWallRun()
     {
+        _movementScript.wallRunning = false;
 
+    }
+
+    private void WallJump()
+    {
+        _exitingWall = true;
+        _exitingWallTimer = exitingWallTime;
+
+        Vector3 wallNormal = _wallRight ? _rightWallHit.normal : _leftWallHit.normal;
+        Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
+
+        _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+        _rb.AddForce(forceToApply, ForceMode.Impulse);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Slide : MonoBehaviour
 {
+
     [Header("References")]
     public Transform orientation;
     public Transform playerObj;
@@ -14,7 +15,6 @@ public class Slide : MonoBehaviour
     public float maxSlideTime;
     public float slideForce;
     private float _slideTimer;
-    public bool isSliding;
 
     public float slideYScale;
     private float _startYScale;
@@ -37,7 +37,7 @@ public class Slide : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isSliding)
+        if (_movement.sliding)
         {
             SlidingMovement();
         }
@@ -53,7 +53,7 @@ public class Slide : MonoBehaviour
             StartSlide();
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftControl) && isSliding)
+        if (Input.GetKeyUp(KeyCode.LeftControl) && _movement.sliding)
         {
             StopSlide();
         }
@@ -61,7 +61,7 @@ public class Slide : MonoBehaviour
 
     private void StartSlide()
     {
-        isSliding = true;
+        _movement.sliding = true;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
         _rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -73,7 +73,7 @@ public class Slide : MonoBehaviour
     {
         Vector3 inputDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
 
-        if (_movement.OnSlop() || _rb.velocity.y > -0.1f)
+        if (!_movement.OnSlop() || _rb.velocity.y > -0.1f)
         {
             _rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
             _slideTimer -= Time.deltaTime;
@@ -92,7 +92,7 @@ public class Slide : MonoBehaviour
 
     private void StopSlide()
     {
-        isSliding = false;
+        _movement.sliding = false;
         playerObj.localScale = new Vector3(playerObj.localScale.x, _startYScale, playerObj.localScale.z);
 
     }
