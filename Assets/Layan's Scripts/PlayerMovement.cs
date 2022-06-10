@@ -5,9 +5,10 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    [Header("Animator")]
+    //[SerializeField] Animator animator;
     [Header("UI TEST delete later")]
-    //public TMP_Text speedText;
+    public TMP_Text speedText;
 
     [Header("Movement settings")]
     private float _moveSpeed;
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        //speedText.text = "Speed" + _moveSpeed;
+        speedText.text = "Speed" + _moveSpeed;
 
 
         rb = GetComponent<Rigidbody>();
@@ -81,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        //speedText.text = "Speed" + _moveSpeed;
+        speedText.text = "Speed" + _moveSpeed;
 
         Inputs();
         SpeedControl();
@@ -116,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         else if (sliding)
         {
             state = MovementState.sliding;
+            //animator.SetBool("slide", sliding);
             if (OnSlop() && rb.velocity.y < 0.1f)
             {
                 _desiredSpeed = slideSpeed;
@@ -210,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
     private void PlayerMoving()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        //animator.SetBool("run", grounded);
 
         if (OnSlop() && !_exitingSlop)
         {

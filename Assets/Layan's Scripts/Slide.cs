@@ -14,9 +14,9 @@ public class Slide : MonoBehaviour
     [Header("Sliding")]
     public float maxSlideTime;
     public float slideForce;
-    private float _slideTimer;
+    [SerializeField] float _slideTimer;
 
-    public float slideYScale;
+    //public float slideYScale;
     private float _startYScale;
 
     [Header("Inputs")]
@@ -63,7 +63,7 @@ public class Slide : MonoBehaviour
     {
         _movement.sliding = true;
 
-        playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
+        playerObj.localScale = new Vector3(playerObj.localScale.x, playerObj.localScale.y, playerObj.localScale.z);
         _rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         _slideTimer = maxSlideTime;
@@ -93,7 +93,7 @@ public class Slide : MonoBehaviour
     private void StopSlide()
     {
         _movement.sliding = false;
-        playerObj.localScale = new Vector3(playerObj.localScale.x, _startYScale, playerObj.localScale.z);
+        //playerObj.localScale = new Vector3(playerObj.localScale.x, _startYScale, playerObj.localScale.z);
 
     }
 }
