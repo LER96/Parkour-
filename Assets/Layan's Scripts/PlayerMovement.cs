@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("UI TEST delete later")]
-    public TMP_Text speedText;
+    //public TMP_Text speedText;
 
     [Header("Movement settings")]
     private float _moveSpeed;
@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
 
     [Header("GroundCheck")]
-    public float playerHeight;
-    public LayerMask whatIsGrounded;
+    public float groundDist;
+    public LayerMask groundMask;
     public bool grounded = true;
     public float groundDrag;
 
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        speedText.text = "Speed" + _moveSpeed;
+        //speedText.text = "Speed" + _moveSpeed;
 
 
         rb = GetComponent<Rigidbody>();
@@ -81,14 +81,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        speedText.text = "Speed" + _moveSpeed;
+        //speedText.text = "Speed" + _moveSpeed;
 
         Inputs();
         SpeedControl();
         StateHandler();
 
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
-        
+        grounded  = Physics.CheckSphere(orientation.position, groundDist, groundMask);
+
         if (grounded == true)
         {
             rb.drag = groundDrag;
@@ -268,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool OnSlop()
     {
-        if (Physics.Raycast(transform.position,Vector3.down, out _slopHit, playerHeight * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position,Vector3.down, out _slopHit, groundDist * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, _slopHit.normal);
             return angle < maxSlopAngle && angle!=0;
