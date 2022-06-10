@@ -505,7 +505,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27040
+  m_Name: pb_Mesh29364
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1119,9 +1119,6 @@ GameObject:
   - component: {fileID: 497052145}
   - component: {fileID: 497052147}
   - component: {fileID: 497052146}
-  - component: {fileID: 497052149}
-  - component: {fileID: 497052148}
-  - component: {fileID: 497052150}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1148,24 +1145,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &497052146
-CharacterController:
+--- !u!114 &497052146
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497052142}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 4
-  m_Radius: 0.75
-  m_SlopeLimit: 70
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4eaa9133f83d7458d0fc9aa13a9907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 0}
+  playerObj: {fileID: 0}
+  maxSlideTime: 0
+  slideForce: 0
+  isSliding: 0
+  slideYScale: 0
 --- !u!114 &497052147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,84 +1170,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497052142}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6262ae8d5987b3c4f889694b33b09a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 497052146}
-  animator: {fileID: 5866666021229111038}
-  speed: 10
-  jump: 5
-  gravity: -9.8
-  groundCheck: {fileID: 1640936678}
-  groundDist: 0.3
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  WallMask:
-    serializedVersion: 2
-    m_Bits: 64
-  isGrounded: 0
-  isWall: 0
---- !u!54 &497052148
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497052142}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &497052149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497052142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3b378c908afcf04b8dababe5c8e2403, type: 3}
+  m_Script: {fileID: 11500000, guid: 226955e375e22f1419a9b648d53a6ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  moveMultiplier: 10
-  walkSpeed: 4
-  sprintSpeed: 6
-  acceleration: 10
-  groundDrag: 5
-  airDrag: 1.5
-  jumpForce: 30
-  airMultiplier: 0.4
-  rb: {fileID: 497052148}
-  groundCheck: {fileID: 1640936678}
-  groundDist: 0.3
-  groundMask:
+  walkSpeed: 0
+  sprintSpeed: 0
+  orientation: {fileID: 0}
+  jumpForce: 0
+  jumpCooldown: 0
+  airMultiplayer: 0
+  wallRunSpeed: 0
+  playerHeight: 0
+  whatIsGrounded:
     serializedVersion: 2
-    m_Bits: 8
-  isGrounded: 0
---- !u!136 &497052150
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497052142}
-  m_Material: {fileID: 13400000, guid: bc0204e90b28ca34797fb4748107e7e8, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 4
-  m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
+    m_Bits: 0
+  groundDrag: 0
+  crouchSpeed: 0
+  crouchYScale: 0
+  maxSlopAngle: 0
+  state: 0
+  wallRunning: 0
 --- !u!1 &596161454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,7 +1253,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596161454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1410,7 +1351,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26986
+  m_Name: pb_Mesh29328
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1623,7 +1564,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27020
+  m_Name: pb_Mesh29344
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3470,7 +3411,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26916
+  m_Name: pb_Mesh29240
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4284,6 +4225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653021371524}
   - component: {fileID: 5866666021229111038}
+  - component: {fileID: 5866666021229111039}
   m_Layer: 0
   m_Name: Breathing Idle
   m_TagString: Untagged
@@ -5167,6 +5109,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &5866666021229111039
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148768351806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!4 &5901452234583961095
 Transform:
   m_ObjectHideFlags: 0
