@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
 
     [Header("GroundCheck")]
-    public float groundDist;
+    public float height;
     public LayerMask groundMask;
     public bool grounded = true;
     public float groundDrag;
@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         SpeedControl();
         StateHandler();
 
-        grounded  = Physics.CheckSphere(orientation.position, groundDist, groundMask);
+        grounded  = Physics.Raycast(orientation.position, Vector3.down, height, groundMask);
 
         if (grounded == true)
         {
@@ -271,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool OnSlop()
     {
-        if (Physics.Raycast(transform.position,Vector3.down, out _slopHit, groundDist * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position,Vector3.down, out _slopHit, height * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, _slopHit.normal);
             return angle < maxSlopAngle && angle!=0;
