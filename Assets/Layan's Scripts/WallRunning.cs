@@ -62,8 +62,6 @@ public class WallRunning : MonoBehaviour
     {
         _wallRight = Physics.Raycast(transform.position, orientation.right, out _rightWallHit, wallCheckDistance, whatIsWall);
         _wallLeft = Physics.Raycast(transform.position, -orientation.right, out _leftWallHit, wallCheckDistance, whatIsWall);
-
-        Debug.Log($"right:{_wallRight}, left{_wallLeft}");
     }
 
     public bool AbovGround()
