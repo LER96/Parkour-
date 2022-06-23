@@ -200,7 +200,7 @@ MonoBehaviour:
   jumpForce: 7
   jumpCooldown: 0.25
   airMultiplayer: 0.4
-  groundDist: 1
+  height: 2
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 1426706652}
-  playerObj: {fileID: 83537757}
+  playerObj: {fileID: 1181984718}
   maxSlideTime: 0.75
   slideForce: 200
   _slideTimer: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   wallJumpUpForce: 7
   wallJumpSideForce: 12
   wallCheckDistance: 0.7
-  minJumpHeight: 2
+  minJumpHeight: 1.5
   exitingWallTime: 0.2
   orientation: {fileID: 1426706652}
 --- !u!1 &164390647
