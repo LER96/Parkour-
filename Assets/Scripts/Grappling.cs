@@ -19,7 +19,7 @@ public class Grappling : MonoBehaviour
     Vector3 hookpoint;
     bool isShooting;
     bool isGrappling;
-    bool isSwingging;
+    //bool isSwingging;
 
     private void Start()
     {
