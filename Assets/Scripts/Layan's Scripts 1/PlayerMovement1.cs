@@ -11,11 +11,11 @@ public class PlayerMovement1 : MonoBehaviour
     public TMP_Text speedText;
 
     [Header("Movement settings")]
+    [SerializeField] Transform orientation;
     [SerializeField] float _moveSpeed;
     [SerializeField] float acceleration;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
-    [SerializeField] Transform orientation;
     [SerializeField] float slideSpeed;
     [SerializeField] float wallRunSped;
 
@@ -39,10 +39,6 @@ public class PlayerMovement1 : MonoBehaviour
     [SerializeField] float currentGroundDist;
     [SerializeField] Transform groundCheck;
 
-    //[Header("Crouching")]
-    //public float crouchSpeed;
-    //public float crouchYScale;
-    //private float _startYSale;
 
     [Header("SlopeHandling")]
     public float maxSlopAngle;
@@ -70,6 +66,7 @@ public class PlayerMovement1 : MonoBehaviour
     }
     public bool sliding;
     public bool wallRunning;
+
 
     private void Start()
     {
@@ -112,7 +109,6 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void StateHandler()
     {
-
         if (wallRunning)
         {
             state = MovementState.wallRunning;
@@ -131,12 +127,6 @@ public class PlayerMovement1 : MonoBehaviour
             }
         }
 
-        //else if (Input.GetKey(KeyCode.C))
-        //{
-        //    state = MovementState.crouching;
-        //    _desiredSpeed = crouchSpeed;
-        //}
-        
         else if (grounded && Input.GetKey(KeyCode.LeftShift))
         {
             state = MovementState.sprinting;
@@ -186,7 +176,6 @@ public class PlayerMovement1 : MonoBehaviour
         }
         _moveSpeed = _desiredSpeed;
     }
-
 
     private void Inputs()
     {

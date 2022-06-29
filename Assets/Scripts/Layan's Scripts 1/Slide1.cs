@@ -23,6 +23,8 @@ public class Slide1 : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
 
+    [SerializeField] CapsuleCollider col;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -61,8 +63,8 @@ public class Slide1 : MonoBehaviour
 
     private void StartSlide()
     {
+        col.height = 1f;
         _movement.sliding = true;
-
         //playerObj.localScale = new Vector3(playerObj.localScale.x, playerObj.localScale.y, playerObj.localScale.z);
         _rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
@@ -92,6 +94,7 @@ public class Slide1 : MonoBehaviour
 
     private void StopSlide()
     {
+        col.height = 3.65f;
         _movement.sliding = false;
         //playerObj.localScale = new Vector3(playerObj.localScale.x, _startYScale, playerObj.localScale.z);
 
