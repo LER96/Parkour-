@@ -1386,9 +1386,9 @@ GameObject:
   - component: {fileID: 446797631}
   - component: {fileID: 446797630}
   - component: {fileID: 446797629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
-  m_TagString: Grap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1464,7 +1464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446797628}
   m_LocalRotation: {x: -0, y: 0.69266504, z: -0, w: 0.7212594}
-  m_LocalPosition: {x: -17.46, y: 111.35, z: -148.63}
+  m_LocalPosition: {x: -17.46, y: 110.49, z: -148.63}
   m_LocalScale: {x: 10.414018, y: 1, z: 6.7903085}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1678,6 +1678,7 @@ GameObject:
   - component: {fileID: 497052153}
   - component: {fileID: 497052155}
   - component: {fileID: 497052156}
+  - component: {fileID: 497052157}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1861,9 +1862,32 @@ MonoBehaviour:
   dropDist: 5
   hookingSpeed: 3
   rb: {fileID: 497052148}
-  redCross: {fileID: 447894978}
-  locked: 0
   ready: 0
+  redCross: {fileID: 447894978}
+  grapOnSight: []
+--- !u!114 &497052157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497052142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e36e3d4cbac174ba429754c6488679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 129.2
+  viewAngle: 54
+  height: 9.17
+  grapMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obsMask:
+    serializedVersion: 2
+    m_Bits: 72
+  delay: 0.2
+  visibleTargets: []
 --- !u!64 &523211895
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2245,7 +2269,7 @@ GameObject:
   - component: {fileID: 745954802}
   m_Layer: 7
   m_Name: Cube (2)
-  m_TagString: Grap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2321,7 +2345,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745954801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.74, y: 5.03, z: 0}
+  m_LocalPosition: {x: -16.74, y: 20.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4665,7 +4689,7 @@ GameObject:
   - component: {fileID: 1905061363}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Grap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8945,7 +8969,7 @@ GameObject:
   - component: {fileID: 8884345392263736204}
   - component: {fileID: 4202601502028988408}
   - component: {fileID: 906031912}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: hand_cran2_pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9290,7 +9314,7 @@ GameObject:
   - component: {fileID: 7178834878183213787}
   - component: {fileID: 5088237972086130765}
   - component: {fileID: 762082882}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Crane1_hand_pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9370,7 +9394,7 @@ GameObject:
   - component: {fileID: 6659604065529977505}
   - component: {fileID: 1681916126769789166}
   - component: {fileID: 935745027}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: pCube106
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30238,7 +30262,7 @@ GameObject:
   - component: {fileID: 3228714521080998444}
   - component: {fileID: 4769870391833439997}
   - component: {fileID: 533634399}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Crane_hand_pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
