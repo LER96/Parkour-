@@ -1584,8 +1584,6 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -8650700055871453277, guid: 8bc42f4823e398d478f31b8bc2a75e93, type: 2}
     value: {fileID: 449758322}
-  - key: {fileID: 6403434687545546007, guid: 8bc42f4823e398d478f31b8bc2a75e93, type: 2}
-    value: {fileID: 449758322}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &449758322
@@ -1831,6 +1829,7 @@ GameObject:
   - component: {fileID: 497052155}
   - component: {fileID: 497052156}
   - component: {fileID: 497052157}
+  - component: {fileID: 497052158}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1845,8 +1844,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497052142}
-  m_LocalRotation: {x: -0, y: 0.9996448, z: -0, w: -0.026650475}
-  m_LocalPosition: {x: 0, y: 0, z: -13.71}
+  m_LocalRotation: {x: -0, y: 0.999318, z: -0, w: -0.036926337}
+  m_LocalPosition: {x: 0, y: 0, z: -18.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1855,7 +1854,7 @@ Transform:
   - {fileID: 270237571}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 183.054, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 184.232, z: 0}
 --- !u!54 &497052148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1990,7 +1989,7 @@ MonoBehaviour:
   slideForce: 5
   _slideTimer: 0
   col: {fileID: 497052152}
-  col2: {fileID: 0}
+  col2: {fileID: 497052158}
 --- !u!114 &497052156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2041,6 +2040,20 @@ MonoBehaviour:
     m_Bits: 72
   delay: 0.2
   visibleTargets: []
+--- !u!136 &497052158
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497052142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!64 &523211895
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3841,6 +3854,78 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6467145979678406298, guid: 269c2cff4770b38489c4dd600ecfabe7, type: 3}
+--- !u!1 &1382917638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1382917641}
+  - component: {fileID: 1382917640}
+  - component: {fileID: 1382917639}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &1382917639
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382917638}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 8bc42f4823e398d478f31b8bc2a75e93, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -8650700055871453277, guid: 8bc42f4823e398d478f31b8bc2a75e93, type: 2}
+    value: {fileID: 449758322}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &1382917640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382917638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6782cc99c379d7546a5076ec3af8fc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quitGame: {fileID: 0}
+  startGame: {fileID: 0}
+  cutscene: {fileID: 449758321}
+  cutsceneCamera: {fileID: 449758320}
+  mainCamera: {fileID: 330585543}
+  reference: {fileID: 497052142}
+--- !u!4 &1382917641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382917638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 390.74997, y: 220, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1385315129
 MeshCollider:
   m_ObjectHideFlags: 0

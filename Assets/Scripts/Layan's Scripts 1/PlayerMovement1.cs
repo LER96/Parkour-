@@ -81,7 +81,7 @@ public class PlayerMovement1 : MonoBehaviour
     private void Update()
     {
         speedText.text = "Speed: " + (int)_moveSpeed + ": " + state.ToString();
-
+      
         Inputs();
         SpeedControl();
         StateHandler();
@@ -89,7 +89,7 @@ public class PlayerMovement1 : MonoBehaviour
 
         animator.SetBool("slide", sliding);
 
-        grounded  = Physics.Raycast(orientation.position, Vector3.down, height, groundMask);
+        grounded = Physics.Raycast(orientation.position, Vector3.down, height, groundMask);
         animator.SetBool("isground", grounded);
         if (grounded == true)
         {
@@ -99,7 +99,6 @@ public class PlayerMovement1 : MonoBehaviour
         {
             rb.drag = 0;
         }
-
     }
 
     private void FixedUpdate()
