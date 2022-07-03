@@ -893,7 +893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.22950745, y: 0}
+  m_AnchoredPosition: {x: -0.22949219, y: 0}
   m_SizeDelta: {x: -10.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1139209486
@@ -1263,6 +1263,7 @@ MonoBehaviour:
   quitGame: {fileID: 1596379716}
   startGame: {fileID: 266274603}
   cutscene: {fileID: 0}
+  _skipIntro: 40
   cutsceneCamera: {fileID: 0}
   mainCamera: {fileID: 0}
   playerReference: {fileID: 0}
@@ -1439,7 +1440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15, y: -133.8324}
+  m_AnchoredPosition: {x: 15, y: -150.2}
   m_SizeDelta: {x: -377.4189, y: -378.3352}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987239181
