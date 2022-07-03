@@ -36,7 +36,7 @@ public class PlayerMovement1 : MonoBehaviour
     public LayerMask groundMask;
     public bool grounded = true;
     public float groundDrag;
-    [SerializeField] float groundDist=0.3f;
+    [SerializeField] float groundDist = 0.3f;
     [SerializeField] float currentGroundDist;
     [SerializeField] Transform groundCheck;
 
@@ -45,6 +45,12 @@ public class PlayerMovement1 : MonoBehaviour
     public float maxSlopAngle;
     private RaycastHit _slopHit;
     private bool _exitingSlop = false;
+
+    [Header("Win/Lose")]
+    bool win;
+
+    [Header("Save")]
+    Vector3 lastPos;
 
     [Header("Inputs")]
     float horizontalInput;
@@ -65,6 +71,8 @@ public class PlayerMovement1 : MonoBehaviour
         sliding,
         wallRunning,
     }
+
+
     public bool sliding;
     public bool wallRunning;
 
@@ -77,12 +85,12 @@ public class PlayerMovement1 : MonoBehaviour
 
         canJump = true;
 
+        lastPos = transform.position;
         //_startYSale = transform.localScale.y;
     }
     private void Update()
     {
         speedText.text = "Speed: " + (int)_moveSpeed + ": " + state.ToString();
-
         CheckGround();
         Inputs();
         SpeedControl();
@@ -106,6 +114,7 @@ public class PlayerMovement1 : MonoBehaviour
         if (grounded == true)
         {
             rb.drag = groundDrag;
+            StartCoroutine("GiveLocation");
         }
         else
         {
@@ -113,6 +122,11 @@ public class PlayerMovement1 : MonoBehaviour
         }
     }
 
+    IEnumerator GiveLocation()
+    {
+        yield return new WaitForSeconds(2);
+        lastPos = transform.position;
+    }
     private void StateHandler()
     {
         if (wallRunning)
@@ -220,7 +234,6 @@ public class PlayerMovement1 : MonoBehaviour
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
         }
-
         else if (grounded == true)
         {
             rb.AddForce(moveDirection.normalized * _moveSpeed * 10f, ForceMode.Force);
@@ -307,6 +320,19 @@ public class PlayerMovement1 : MonoBehaviour
         if (currentGroundDist > 0.5f)
         {
             animator.SetFloat("jump", currentGroundDist);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag=="Win")
+        {
+            win = true;
+            Debug.Log("winner!");
+        }
+        if(other.transform.tag == "Death" || other.transform.tag=="Bullet")
+        {
+            transform.position = lastPos;
         }
     }
 }
