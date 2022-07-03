@@ -36,6 +36,7 @@ public class PlayerMovement1 : MonoBehaviour
     public LayerMask groundMask;
     public bool grounded = true;
     public float groundDrag;
+    [SerializeField] float groundDist=0.3f;
     [SerializeField] float currentGroundDist;
     [SerializeField] Transform groundCheck;
 
@@ -81,7 +82,8 @@ public class PlayerMovement1 : MonoBehaviour
     private void Update()
     {
         speedText.text = "Speed: " + (int)_moveSpeed + ": " + state.ToString();
-      
+
+        CheckGround();
         Inputs();
         SpeedControl();
         StateHandler();
@@ -89,7 +91,17 @@ public class PlayerMovement1 : MonoBehaviour
 
         animator.SetBool("slide", sliding);
 
-        grounded = Physics.Raycast(orientation.position, Vector3.down, height, groundMask);
+        //grounded = Physics.Raycast(groundCheck.position, Vector3.down, height, groundMask);
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMoving();
+    }
+
+    private void CheckGround()
+    {
+        grounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
         animator.SetBool("isground", grounded);
         if (grounded == true)
         {
@@ -99,11 +111,6 @@ public class PlayerMovement1 : MonoBehaviour
         {
             rb.drag = 0;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        PlayerMoving();
     }
 
     private void StateHandler()
@@ -181,7 +188,7 @@ public class PlayerMovement1 : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.Space) && canJump == true && grounded)
+        if (Input.GetKey(KeyCode.Space) && canJump && grounded)
         {
             canJump = false;
             Jump();
@@ -297,7 +304,7 @@ public class PlayerMovement1 : MonoBehaviour
             currentGroundDist = hit.distance;
         }
 
-        if (currentGroundDist > 1.2)
+        if (currentGroundDist > 0.5f)
         {
             animator.SetFloat("jump", currentGroundDist);
         }
