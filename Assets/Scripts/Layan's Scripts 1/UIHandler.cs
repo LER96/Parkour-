@@ -44,4 +44,14 @@ public class UIHandler : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void Options()
+    {
+
+    }
+
+    public void SetQuality(int index)
+    {
+        QualitySettings.SetQualityLevel(index);
+    }
 }
