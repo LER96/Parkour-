@@ -13,9 +13,9 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.forward * speed*10;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.CompareTag("Player"))
+        if(other.transform.tag=="Death")
         {
             Destroy(this.gameObject);
         }

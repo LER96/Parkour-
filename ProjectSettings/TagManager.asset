@@ -7,6 +7,8 @@ TagManager:
   - Grap
   - Death
   - Win
+  - Arrow
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

@@ -46,8 +46,6 @@ public class PlayerMovement1 : MonoBehaviour
     private RaycastHit _slopHit;
     private bool _exitingSlop = false;
 
-    [Header("Win/Lose")]
-    bool win;
 
     [Header("Save")]
     Vector3 lastPos;
@@ -76,15 +74,11 @@ public class PlayerMovement1 : MonoBehaviour
     public bool sliding;
     public bool wallRunning;
 
-
     private void Start()
     {
         speedText.text = "Speed: " + _moveSpeed + ": " + state.ToString();
-
         rb.freezeRotation = true;
-
         canJump = true;
-
         lastPos = transform.position;
         //_startYSale = transform.localScale.y;
     }
@@ -114,7 +108,6 @@ public class PlayerMovement1 : MonoBehaviour
         if (grounded == true)
         {
             rb.drag = groundDrag;
-            StartCoroutine("GiveLocation");
         }
         else
         {
@@ -122,11 +115,6 @@ public class PlayerMovement1 : MonoBehaviour
         }
     }
 
-    IEnumerator GiveLocation()
-    {
-        yield return new WaitForSeconds(2);
-        lastPos = transform.position;
-    }
     private void StateHandler()
     {
         if (wallRunning)
@@ -327,12 +315,16 @@ public class PlayerMovement1 : MonoBehaviour
     {
         if(other.transform.tag=="Win")
         {
-            win = true;
             Debug.Log("winner!");
         }
-        if(other.transform.tag == "Death" || other.transform.tag=="Bullet")
+        if(other.transform.tag == "Death")
         {
             transform.position = lastPos;
+            speedText.text = "You died";
+        }
+        if(other.transform.tag == "CheckPoint")
+        {
+            lastPos = other.transform.position;
         }
     }
 }

@@ -7,12 +7,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] float radiusVis;
     [SerializeField] float delay;
     [SerializeField] LayerMask isPlayer;
+    [SerializeField] Animator shootAnimation;
     [SerializeField] Transform target;
     [SerializeField] Transform hand;
     [SerializeField] Transform pointShoot;
     [SerializeField] Transform bulletPrefab;
     bool inrange;
+    bool islooking;
     float distance;
+
+    Vector3 targetDir;
 
     // Start is called before the first frame update
     void Start()
@@ -51,13 +55,18 @@ public class Enemy : MonoBehaviour
 
     void Onsight()
     {
-        Vector3 targetDir = (transform.position - target.position).normalized;
-        if(!Physics.Raycast(transform.position, targetDir, distance, isPlayer))
+        targetDir = (transform.position - target.position).normalized;
+        if (!Physics.Raycast(transform.position, targetDir, distance, isPlayer))
         {
+            islooking = true;
             hand.LookAt(target);
             Debug.Log("Shoot");
             Shoot();
         }
+        else
+            islooking = false;
+
+        shootAnimation.SetBool("shoot", islooking);
     }
 
     void Shoot()
