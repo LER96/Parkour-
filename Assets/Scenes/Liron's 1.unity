@@ -1991,7 +1991,7 @@ MonoBehaviour:
   slideForce: 5
   _slideTimer: 0
   col: {fileID: 497052152}
-  slideCol: {fileID: 0}
+  slideCol: {fileID: 497052158}
 --- !u!114 &497052156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3909,8 +3909,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quitGame: {fileID: 0}
   startGame: {fileID: 0}
+  backButton: {fileID: 0}
   loadingUI: {fileID: 0}
   loadingImage: {fileID: 0}
+  optionsCanvas: {fileID: 0}
+  mainMenuCanvas: {fileID: 0}
 --- !u!4 &1382917641
 Transform:
   m_ObjectHideFlags: 0
