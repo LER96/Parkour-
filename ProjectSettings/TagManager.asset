@@ -9,6 +9,8 @@ TagManager:
   - Win
   - Arrow
   - CheckPoint
+  - Bullet
+  - Ground
   layers:
   - Default
   - TransparentFX

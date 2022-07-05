@@ -31,14 +31,4 @@ public class Timer : MonoBehaviour
             //Time.timeScale = 0; 
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.transform.tag=="Arrow")
-        {
-            var arrow = other.GetComponent<Coin>();
-            timeLeft += arrow.value;
-            other.gameObject.SetActive(false);
-        }
-    }
 }

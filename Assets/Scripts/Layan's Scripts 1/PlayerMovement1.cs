@@ -37,7 +37,11 @@ public class PlayerMovement1 : MonoBehaviour
     public bool grounded = true;
     public float groundDrag;
     [SerializeField] float groundDist = 0.3f;
+
     [SerializeField] float currentGroundDist;
+    bool isJumping;
+    bool isLanding;
+    float saveLastHeight;
     [SerializeField] Transform groundCheck;
 
 
@@ -299,15 +303,29 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void CheckDist()
     {
+        animator.SetBool("isLanding", isLanding);
+        animator.SetBool("isJumping", isJumping);
         RaycastHit hit;
         if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundMask))
         {
             currentGroundDist = hit.distance;
         }
-
-        if (currentGroundDist > 0.5f)
+        if (saveLastHeight < currentGroundDist && grounded==false)
         {
-            animator.SetFloat("jump", currentGroundDist);
+            saveLastHeight = currentGroundDist;
+            isJumping = true;
+            isLanding = false;
+        }
+        else if(saveLastHeight >= currentGroundDist && grounded==false)
+        {
+            currentGroundDist = saveLastHeight;
+            isLanding=true;
+            isJumping = false;
+        }
+        else if(grounded)
+        {
+            isLanding = false;
+            isJumping = false;
         }
     }
 
@@ -317,7 +335,7 @@ public class PlayerMovement1 : MonoBehaviour
         {
             Debug.Log("winner!");
         }
-        if(other.transform.tag == "Death")
+        if(other.transform.tag == "Death" || other.transform.tag == "Bullet")
         {
             transform.position = lastPos;
             speedText.text = "You died";
@@ -326,5 +344,6 @@ public class PlayerMovement1 : MonoBehaviour
         {
             lastPos = other.transform.position;
         }
+
     }
 }
