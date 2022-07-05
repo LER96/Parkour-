@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
+using TMPro;
 
 public class CutsceneHandler : MonoBehaviour
 {
@@ -17,8 +19,13 @@ public class CutsceneHandler : MonoBehaviour
     private PlayerMovement1 player;
     private PlayerCamMovement playerCam;
 
+    [Header("UI")]
+    public TMP_Text skipIntro;
+
     private void Start()
     {
+        skipIntro.text = "Press F to skip";
+
         player = playerReference.GetComponent<PlayerMovement1>();
         playerCam = mainCamera.GetComponent<PlayerCamMovement>();
         player.enabled = false;
@@ -37,6 +44,7 @@ public class CutsceneHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             cutscene.time = _skipIntro;
+            skipIntro.enabled = false;
         }
         else if (cutscene.state != PlayState.Playing)
         {
@@ -46,6 +54,7 @@ public class CutsceneHandler : MonoBehaviour
             cutsceneCamera.SetActive(false);
             playerCam.enabled = true;
             Debug.Log("done");
+            skipIntro.enabled = false;
         }
     }
 
