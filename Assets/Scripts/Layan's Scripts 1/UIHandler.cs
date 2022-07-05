@@ -19,6 +19,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] GameObject mainMenuCanvas;
     [SerializeField] TMP_Dropdown resolutionsDropdown;
 
+
+    public bool isGamePaused = false;
     Resolution[] resolutions;
 
     private void Start()
@@ -40,6 +42,34 @@ public class UIHandler : MonoBehaviour
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
+    }
+
+    private void Update()
+    {
+        Pause();
+    }
+
+    public void Pause()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == false)
+            {
+                isGamePaused = true;
+                mainMenuCanvas.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
+                Time.timeScale = 0;
+                Debug.Log("paused");
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == true)
+            {
+                isGamePaused = false;
+                mainMenuCanvas.SetActive(false);
+                optionsCanvas.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
+            }
+        }
     }
 
     public void SetResolution(int resolutionIndex)
@@ -71,6 +101,12 @@ public class UIHandler : MonoBehaviour
             loadingImage.fillAmount = barProgress;
             yield return null;
         }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     public void NextLvl()
