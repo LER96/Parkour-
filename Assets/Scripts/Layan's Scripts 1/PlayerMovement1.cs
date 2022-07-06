@@ -36,6 +36,7 @@ public class PlayerMovement1 : MonoBehaviour
     public LayerMask groundMask;
     public bool grounded = true;
     public float groundDrag;
+    public float airGround = 2;
     [SerializeField] float groundDist = 0.3f;
 
     [SerializeField] float currentGroundDist;
@@ -115,7 +116,7 @@ public class PlayerMovement1 : MonoBehaviour
         }
         else
         {
-            rb.drag = 0;
+            rb.drag = airGround;
         }
     }
 

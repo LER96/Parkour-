@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] float radiusVis;
     [SerializeField] float delay;
-    [SerializeField] LayerMask isPlayer;
+    [SerializeField] LayerMask isObs;
     [SerializeField] Animator shootAnimation;
     [SerializeField] Transform target;
     [SerializeField] Transform hand;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     void Onsight()
     {
         targetDir = (transform.position - target.position).normalized;
-        if (!Physics.Raycast(transform.position, targetDir, distance, isPlayer))
+        if (!Physics.Raycast(transform.position, targetDir, distance, isObs))
         {
             islooking = true;
             hand.LookAt(target);
