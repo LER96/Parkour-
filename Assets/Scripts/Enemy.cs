@@ -28,11 +28,11 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(delay);
             if(inrange)
             {
                 Onsight();
             }
+            yield return new WaitForSeconds(delay);
         }
     }
 
