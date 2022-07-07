@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueBox;
 
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI skipTutorialText;
     [SerializeField] float textSpeed;
 
     public int index;
@@ -17,6 +19,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        skipTutorialText.text = "Press F to skip tutorial";
         dialogueBox.SetActive(true);
         StartCoroutine(Type());
         index = _originalIndex;
@@ -35,6 +38,8 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueBox.SetActive(false);
         }
+
+        SkipTutorial();
     }
 
     IEnumerator Type()
@@ -43,6 +48,15 @@ public class DialogueManager : MonoBehaviour
         {
             text.text += letter;
             yield return new WaitForSeconds(textSpeed);
+        }
+    }
+
+    private void SkipTutorial()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            SceneManager.LoadScene(0);
         }
     }
 }
