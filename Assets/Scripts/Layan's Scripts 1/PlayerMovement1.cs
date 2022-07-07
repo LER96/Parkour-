@@ -37,7 +37,11 @@ public class PlayerMovement1 : MonoBehaviour
     public bool grounded = true;
     public float groundDrag;
     [SerializeField] float groundDist = 0.3f;
+
     [SerializeField] float currentGroundDist;
+    bool isJumping;
+    bool isLanding;
+    float saveLastHeight;
     [SerializeField] Transform groundCheck;
 
 
@@ -46,8 +50,6 @@ public class PlayerMovement1 : MonoBehaviour
     private RaycastHit _slopHit;
     private bool _exitingSlop = false;
 
-    [Header("Win/Lose")]
-    bool win;
 
     [Header("Save")]
     Vector3 lastPos;
@@ -76,15 +78,11 @@ public class PlayerMovement1 : MonoBehaviour
     public bool sliding;
     public bool wallRunning;
 
-
     private void Start()
     {
         speedText.text = "Speed: " + _moveSpeed + ": " + state.ToString();
-
         rb.freezeRotation = true;
-
         canJump = true;
-
         lastPos = transform.position;
         //_startYSale = transform.localScale.y;
     }
@@ -114,7 +112,6 @@ public class PlayerMovement1 : MonoBehaviour
         if (grounded == true)
         {
             rb.drag = groundDrag;
-            StartCoroutine("GiveLocation");
         }
         else
         {
@@ -122,11 +119,6 @@ public class PlayerMovement1 : MonoBehaviour
         }
     }
 
-    IEnumerator GiveLocation()
-    {
-        yield return new WaitForSeconds(2);
-        lastPos = transform.position;
-    }
     private void StateHandler()
     {
         if (wallRunning)
@@ -311,15 +303,29 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void CheckDist()
     {
+        animator.SetBool("isLanding", isLanding);
+        animator.SetBool("isJumping", isJumping);
         RaycastHit hit;
         if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundMask))
         {
             currentGroundDist = hit.distance;
         }
-
-        if (currentGroundDist > 0.5f)
+        if (saveLastHeight < currentGroundDist && grounded==false)
         {
-            animator.SetFloat("jump", currentGroundDist);
+            saveLastHeight = currentGroundDist;
+            isJumping = true;
+            isLanding = false;
+        }
+        else if(saveLastHeight >= currentGroundDist && grounded==false)
+        {
+            currentGroundDist = saveLastHeight;
+            isLanding=true;
+            isJumping = false;
+        }
+        else if(grounded)
+        {
+            isLanding = false;
+            isJumping = false;
         }
     }
 
@@ -327,12 +333,17 @@ public class PlayerMovement1 : MonoBehaviour
     {
         if(other.transform.tag=="Win")
         {
-            win = true;
             Debug.Log("winner!");
         }
-        if(other.transform.tag == "Death" || other.transform.tag=="Bullet")
+        if(other.transform.tag == "Death" || other.transform.tag == "Bullet")
         {
             transform.position = lastPos;
+            speedText.text = "You died";
         }
+        if(other.transform.tag == "CheckPoint")
+        {
+            lastPos = other.transform.position;
+        }
+
     }
 }
