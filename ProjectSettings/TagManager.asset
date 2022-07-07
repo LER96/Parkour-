@@ -7,6 +7,9 @@ TagManager:
   - Grap
   - Death
   - Win
+  - Ground
+  - Arrow
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - Wall
   - Grapplin
-  - 
+  - Player
   - Win
   - 
   - 

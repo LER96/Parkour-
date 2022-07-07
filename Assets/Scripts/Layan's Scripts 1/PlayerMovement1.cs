@@ -7,8 +7,6 @@ public class PlayerMovement1 : MonoBehaviour
 {
     [Header("Animator")]
     public Animator animator;
-    [Header("UI TEST delete later")]
-    public TMP_Text speedText;
 
     [Header("Movement settings")]
     [SerializeField] Transform orientation;
@@ -80,7 +78,6 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void Start()
     {
-        speedText.text = "Speed: " + _moveSpeed + ": " + state.ToString();
         rb.freezeRotation = true;
         canJump = true;
         lastPos = transform.position;
@@ -88,7 +85,6 @@ public class PlayerMovement1 : MonoBehaviour
     }
     private void Update()
     {
-        speedText.text = "Speed: " + (int)_moveSpeed + ": " + state.ToString();
         CheckGround();
         Inputs();
         SpeedControl();
@@ -338,7 +334,6 @@ public class PlayerMovement1 : MonoBehaviour
         if(other.transform.tag == "Death" || other.transform.tag == "Bullet")
         {
             transform.position = lastPos;
-            speedText.text = "You died";
         }
         if(other.transform.tag == "CheckPoint")
         {

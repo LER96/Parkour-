@@ -17,11 +17,24 @@ public class Timer : MonoBehaviour
 
     void Stoper()
     {
-        if (timeLeft > 0)
+        timeLeft -= Time.deltaTime;
+        if (timeLeft > 0 && timeLeft>60)
         {
-            timeLeft -= Time.deltaTime;
+            var minutes = Mathf.FloorToInt(timeLeft / 60);
             var seconds = Mathf.FloorToInt(timeLeft % 60);
-            timeUI.text = ""+ seconds;
+            if (seconds < 10)
+            {
+                timeUI.text = minutes + ":0" + seconds;
+            }
+            else
+            {
+                timeUI.text = minutes + ":" + seconds;
+            }
+        }
+        else if(timeLeft<60)
+        {
+            var seconds = Mathf.FloorToInt(timeLeft % 60);
+            timeUI.text = "" + seconds;
         }
         else
         {
