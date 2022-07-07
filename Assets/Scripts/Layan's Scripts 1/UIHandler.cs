@@ -83,6 +83,11 @@ public class UIHandler : MonoBehaviour
         Application.Quit();
     }
 
+    public void Tutorial()
+    {
+        StartCoroutine(LoadAsync(2));
+    }
+
     public void StartGame()
     {
         //SceneManager.LoadScene(1);

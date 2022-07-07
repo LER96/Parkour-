@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Liron's.unity
     guid: 8034404ede62a70499e894e11d253f4e
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 47f87cb3dc9c68a41951e82052fe4511
   m_configObjects: {}
