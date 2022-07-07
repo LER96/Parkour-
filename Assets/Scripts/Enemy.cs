@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform hand;
     [SerializeField] Transform pointShoot;
     [SerializeField] Transform bulletPrefab;
+    [SerializeField] Transform lookpoint;
     bool inrange;
     bool islooking;
     float distance;
@@ -28,17 +29,21 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(delay);
             if(inrange)
             {
                 Onsight();
             }
-            yield return new WaitForSeconds(delay);
         }
     }
 
     private void Update()
     {
         InRange();
+        if(inrange)
+        {
+            transform.LookAt(target);
+        }
     }
 
     void InRange()
@@ -54,19 +59,17 @@ public class Enemy : MonoBehaviour
 
     void Onsight()
     {
-        targetDir = (transform.position - target.position).normalized;
-        if (!Physics.Raycast(transform.position, targetDir, distance, isObs))
+        targetDir = (lookpoint.position - target.position).normalized;
+        if (Physics.Raycast(lookpoint.position, targetDir, distance, isObs))
         {
-            islooking = true;
-            transform.LookAt(target, Vector3.up);
-            hand.LookAt(target);
-            Debug.Log("Shoot");
-            Shoot();
+            return;
         }
         else
-            islooking = false;
+        {
+            hand.LookAt(target);
+            Shoot();
 
-        shootAnimation.SetBool("shoot", islooking);
+        }
     }
 
     void Shoot()

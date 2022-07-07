@@ -226,7 +226,7 @@ public class PlayerMovement1 : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * _moveSpeed * 10f, ForceMode.Force);
         }
-        else if (grounded == false)
+        else if(grounded==false)
         {
             rb.AddForce(moveDirection.normalized * _moveSpeed * 10f * airMultiplayer, ForceMode.Force);
         }

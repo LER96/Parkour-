@@ -28,9 +28,9 @@ public class Bullet : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.transform.tag=="Player" || collision.collider.transform.tag == "Death" || collision.collider.transform.tag == "Ground")
+        if (other.transform.tag == "Player" || other.transform.tag == "Death" || other.transform.tag == "Ground")
         {
             Destroy(this.gameObject);
         }

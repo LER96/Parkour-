@@ -28,7 +28,7 @@ public class WallRunning1 : MonoBehaviour
     private bool _wallRight;
 
     [Header("Exiting Wall")]
-    private bool _exitingWall;
+    private bool _exitingWall=true;
     public float exitingWallTime;
     private float _exitingWallTimer;
 
