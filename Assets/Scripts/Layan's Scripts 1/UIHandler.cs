@@ -48,7 +48,17 @@ public class UIHandler : MonoBehaviour
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
-        LoadSettings();
+
+        if (!PlayerPrefs.HasKey(SAVE_VOLUME) || !PlayerPrefs.HasKey(SAVE_QUALITY))
+        {
+            PlayerPrefs.SetFloat(SAVE_VOLUME, 1);
+            PlayerPrefs.SetInt(SAVE_QUALITY, 2);
+            LoadSettings();
+        }
+        else
+        {
+            LoadSettings();
+        }
     }
 
     private void Update()
@@ -67,7 +77,6 @@ public class UIHandler : MonoBehaviour
                 mainMenuCanvas.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 Time.timeScale = 0;
-                Debug.Log("paused");
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == true)
             {
