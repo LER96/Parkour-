@@ -8,8 +8,9 @@ using TMPro;
 
 public class UIHandler : MonoBehaviour
 {
-    [Header("UI Objects")]
+    [Header("Objects")]
     [SerializeField] GameObject loadingUI;
+    [SerializeField] GameObject winPoints;
     [SerializeField] Image loadingImage;
     [SerializeField] Slider volumeSlider;
     [SerializeField] TMP_Dropdown resolutionsDropdown;
@@ -23,6 +24,7 @@ public class UIHandler : MonoBehaviour
     [Header("Consts")]
     const string SAVE_VOLUME = "musicVolume";
     const string SAVE_QUALITY = "qualitySettings";
+    const string ACTIVATION_TAG = "Player";
 
     [Header("Timer")]
     public float timeLeft;
@@ -78,6 +80,11 @@ public class UIHandler : MonoBehaviour
             Stoper();
             LoseScreen();
         }
+
+        if (winPoints != null)
+        {
+            WinCondition();
+        }
     }
 
     void Stoper()
@@ -116,7 +123,7 @@ public class UIHandler : MonoBehaviour
 
     public void Pause()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
+        if (SceneManager.GetActiveScene().buildIndex != 0 && over == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == false)
             {
@@ -145,44 +152,44 @@ public class UIHandler : MonoBehaviour
     }
 
     //Saves values of what the user inputed
-    public void SaveSettings()
+    private void SaveSettings()
     {
         PlayerPrefs.SetFloat(SAVE_VOLUME, volumeSlider.value);
         PlayerPrefs.SetInt(SAVE_QUALITY, qualityDropdown.value);
     }
-
-    public void SetVolume()
+    
+    private void SetVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
 
-    public void SetResolution(int resolutionIndex)
+    private void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
-
-    public void SetQuality(int index)
+    
+    private void SetQuality(int index)
     {
         QualitySettings.SetQualityLevel(index);
     }
-
-    public void QuitGame()
+    
+    private void QuitGame()
     {
         Application.Quit();
     }
-
-    public void Tutorial()
+    
+    private void Tutorial()
     {
         StartCoroutine(LoadAsync(2));
     }
-
-    public void StartGame()
+    
+    private void StartGame()
     {
         StartCoroutine(LoadAsync(1));
     }
 
-    IEnumerator LoadAsync(int sceneIndex)
+    public IEnumerator LoadAsync(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
@@ -196,46 +203,62 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    public void Restart()
+    private void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
-
-    public void NextLvl()
+    
+    private void NextLvl()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    public void Options()
+    
+    private void Options()
     {
         optionsCanvas.SetActive(true);
         mainMenuCanvas.SetActive(false);
     }
-
-    public void LoadMainMenu()
+    
+    private void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
     }
-
-    public void Back()
+    
+    private void Back()
     {
         optionsCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }
-
-    public void FullScreen(bool isFullScreenOn)
+    
+    private void FullScreen(bool isFullScreenOn)
     {
         Screen.fullScreen = isFullScreenOn;
     }
-
-    public void LoseScreen()
+    
+    private void LoseScreen()
     {
         if (over== true)
         {
             loseCanvas.SetActive(true);
             Debug.Log("lose canvas");
             Time.timeScale = 0;
+        }
+    }
+
+    //general win condition
+    private void WinCondition()
+    { 
+        if (winPoints.transform.tag == ACTIVATION_TAG)
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                StartCoroutine(LoadAsync(1));
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                StartCoroutine(LoadAsync(0));
+            }
         }
     }
 }

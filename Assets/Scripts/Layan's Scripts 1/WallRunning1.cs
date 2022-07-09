@@ -13,7 +13,6 @@ public class WallRunning1 : MonoBehaviour
     public float wallJumpSideForce;
     private float _WallRunTimer;
 
-
     [Header("Inputs")]
     private float horizontalInput;
     private float verticalInput;

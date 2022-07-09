@@ -3439,7 +3439,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Option A
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 420cafadc03c519468dc1a77101a5076, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3503,7 +3503,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1204960473
@@ -4841,7 +4841,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Option A
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 420cafadc03c519468dc1a77101a5076, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4905,7 +4905,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1698091261
@@ -4980,16 +4980,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6782cc99c379d7546a5076ec3af8fc71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quitGame: {fileID: 1596379716}
-  startGame: {fileID: 266274603}
-  backButton: {fileID: 1599784053}
   loadingUI: {fileID: 448636269}
+  winPoints: {fileID: 0}
   loadingImage: {fileID: 239669206}
   volumeSlider: {fileID: 965364375}
-  optionsCanvas: {fileID: 1363201174}
-  mainMenuCanvas: {fileID: 302070290}
   resolutionsDropdown: {fileID: 422628220}
   qualityDropdown: {fileID: 1246573042}
+  optionsCanvas: {fileID: 1363201174}
+  mainMenuCanvas: {fileID: 302070290}
+  loseCanvas: {fileID: 0}
+  timeLeft: 0
+  timeUI: {fileID: 0}
+  over: 0
   isGamePaused: 0
 --- !u!1 &1775879802
 GameObject:
@@ -5729,7 +5731,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2023430766

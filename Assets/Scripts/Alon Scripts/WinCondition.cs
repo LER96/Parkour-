@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class WinCondition : MonoBehaviour
 {
+    UIHandler loading;
+
     const string ACTIVATION_TAG = "Player";
     private void OnTriggerEnter(Collider other)
     {
