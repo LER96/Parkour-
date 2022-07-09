@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038accf8139d07e4ca1ee2e5b07f5b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 40
+  radius: 150
   islooking: 0
   isObs:
     serializedVersion: 2
