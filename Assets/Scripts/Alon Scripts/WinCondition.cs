@@ -23,7 +23,7 @@ public class WinCondition : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().buildIndex == 1)
             {
-                StartCoroutine(loading.LoadAsync(0));
+                loading.WinScreen();
             }
         }
     }

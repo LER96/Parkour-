@@ -19,6 +19,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] GameObject optionsCanvas;
     [SerializeField] GameObject mainMenuCanvas;
     [SerializeField] GameObject loseCanvas;
+    [SerializeField] GameObject winCanvas;
 
     [Header("Consts")]
     const string SAVE_VOLUME = "musicVolume";
@@ -138,7 +139,7 @@ public class UIHandler : MonoBehaviour
     }
 
     //Receives values of what the user inputed
-    private void LoadSettings()
+    public void LoadSettings()
     {
         volumeSlider.value = PlayerPrefs.GetFloat(SAVE_VOLUME);
         qualityDropdown.value = PlayerPrefs.GetInt(SAVE_QUALITY);
@@ -146,34 +147,34 @@ public class UIHandler : MonoBehaviour
     }
 
     //Saves values of what the user inputed
-    private void SaveSettings()
+    public void SaveSettings()
     {
         PlayerPrefs.SetFloat(SAVE_VOLUME, volumeSlider.value);
         PlayerPrefs.SetInt(SAVE_QUALITY, qualityDropdown.value);
     }
-    
-    private void SetVolume()
+
+    public void SetVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
 
-    private void SetResolution(int resolutionIndex)
+    public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
-    
-    private void SetQuality(int index)
+
+    public void SetQuality(int index)
     {
         QualitySettings.SetQualityLevel(index);
     }
-    
-    private void QuitGame()
+
+    public void QuitGame()
     {
         Application.Quit();
     }
-    
-    private void Tutorial()
+
+    public void Tutorial()
     {
         StartCoroutine(LoadAsync(2));
     }
@@ -197,48 +198,56 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    private void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
-    
-    private void NextLvl()
+
+    public void NextLvl()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    
-    private void Options()
+
+    public void Options()
     {
         optionsCanvas.SetActive(true);
         mainMenuCanvas.SetActive(false);
     }
-    
-    private void LoadMainMenu()
+
+    public void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
     }
-    
-    private void Back()
+
+    public void Back()
     {
         optionsCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }
-    
-    private void FullScreen(bool isFullScreenOn)
+
+    public void FullScreen(bool isFullScreenOn)
     {
         Screen.fullScreen = isFullScreenOn;
     }
-    
-    private void LoseScreen()
+
+    public void LoseScreen()
     {
         if (over== true)
         {
+            Cursor.lockState = CursorLockMode.Confined;
             loseCanvas.SetActive(true);
             Debug.Log("lose canvas");
             Time.timeScale = 0;
         }
     }
 
+    public void WinScreen()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        winCanvas.SetActive(true);
+        Time.timeScale = 0;
+    }
 }
 

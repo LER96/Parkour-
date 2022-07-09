@@ -48,7 +48,6 @@ public class CutsceneHandler : MonoBehaviour
         }
         else if (cutscene.state != PlayState.Playing)
         {
-
             player.enabled = true;
             player.animator.enabled = true;
             cutsceneCamera.SetActive(false);
