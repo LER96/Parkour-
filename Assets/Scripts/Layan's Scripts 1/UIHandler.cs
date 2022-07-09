@@ -49,9 +49,13 @@ public class UIHandler : MonoBehaviour
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
 
-        if (!PlayerPrefs.HasKey(SAVE_VOLUME) || !PlayerPrefs.HasKey(SAVE_QUALITY))
+        if (!PlayerPrefs.HasKey(SAVE_VOLUME))
         {
             PlayerPrefs.SetFloat(SAVE_VOLUME, 1);
+            LoadSettings();
+        }
+        else if (!PlayerPrefs.HasKey(SAVE_QUALITY))
+        {
             PlayerPrefs.SetInt(SAVE_QUALITY, 2);
             LoadSettings();
         }
