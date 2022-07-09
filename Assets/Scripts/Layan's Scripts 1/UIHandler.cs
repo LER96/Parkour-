@@ -8,23 +8,32 @@ using TMPro;
 
 public class UIHandler : MonoBehaviour
 {
-    [Header("GameObjects")]
+    [Header("UI Objects")]
     [SerializeField] GameObject quitGame;
     [SerializeField] GameObject startGame;
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject loadingUI;
     [SerializeField] Image loadingImage;
     [SerializeField] Slider volumeSlider;
-
-    [SerializeField] GameObject optionsCanvas;
-    [SerializeField] GameObject mainMenuCanvas;
     [SerializeField] TMP_Dropdown resolutionsDropdown;
     [SerializeField] TMP_Dropdown qualityDropdown;
+
+    [Header("Canvas")]
+    [SerializeField] GameObject optionsCanvas;
+    [SerializeField] GameObject mainMenuCanvas;
+    [SerializeField] GameObject loseCanvas;
 
     [Header("Consts")]
     const string SAVE_VOLUME = "musicVolume";
     const string SAVE_QUALITY = "qualitySettings";
 
+    [Header("Timer")]
+    public float timeLeft = 10;
+    public TMP_Text timeUI;
+    public bool over = false;
+
+
+    private Timer timerCount;
 
     public bool isGamePaused = false;
     Resolution[] resolutions;
@@ -69,6 +78,43 @@ public class UIHandler : MonoBehaviour
     {
         Pause();
         SaveSettings();
+        Stoper();
+        LoseScreen();
+    }
+
+
+    void Stoper()
+    {
+        timeLeft -= Time.deltaTime;
+        if (timeLeft > 0 && timeLeft > 60)
+        {
+            var minutes = Mathf.FloorToInt(timeLeft / 60);
+            var seconds = Mathf.FloorToInt(timeLeft % 60);
+            if (seconds < 10)
+            {
+                timeUI.text = minutes + ":0" + seconds;
+            }
+            else
+            {
+                timeUI.text = minutes + ":" + seconds;
+            }
+            over = false;
+        }
+        else if (timeLeft < 60 && timeLeft > 0)
+        {
+            Debug.Log("test");
+            var seconds = Mathf.FloorToInt(timeLeft % 60);
+            timeUI.text = "" + seconds;
+            over = false;
+        }
+        else if (timeLeft <= 0)
+        {
+            over = true;
+            Debug.Log("over");
+            timeLeft = 0;
+            timeUI.text = "Times UP! Game OVER";
+            //Time.timeScale = 0; 
+        }
     }
 
     public void Pause()
@@ -93,11 +139,6 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    public void SetVolume()
-    {
-        AudioListener.volume = volumeSlider.value;
-    }
-
     //Receives values of what the user inputed
     private void LoadSettings()
     {
@@ -111,6 +152,11 @@ public class UIHandler : MonoBehaviour
     {
         PlayerPrefs.SetFloat(SAVE_VOLUME, volumeSlider.value);
         PlayerPrefs.SetInt(SAVE_QUALITY, qualityDropdown.value);
+    }
+
+    public void SetVolume()
+    {
+        AudioListener.volume = volumeSlider.value;
     }
 
     public void SetResolution(int resolutionIndex)
@@ -171,15 +217,29 @@ public class UIHandler : MonoBehaviour
         mainMenuCanvas.SetActive(false);
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void Back()
     {
         optionsCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }
 
-
     public void FullScreen(bool isFullScreenOn)
     {
         Screen.fullScreen = isFullScreenOn;
+    }
+
+    public void LoseScreen()
+    {
+        if (over == true)
+        {
+            loseCanvas.SetActive(true);
+            Debug.Log("lose canvas");
+            Time.timeScale = 0;
+        }
     }
 }
