@@ -9,9 +9,6 @@ using TMPro;
 public class UIHandler : MonoBehaviour
 {
     [Header("UI Objects")]
-    [SerializeField] GameObject quitGame;
-    [SerializeField] GameObject startGame;
-    [SerializeField] GameObject backButton;
     [SerializeField] GameObject loadingUI;
     [SerializeField] Image loadingImage;
     [SerializeField] Slider volumeSlider;
@@ -81,7 +78,6 @@ public class UIHandler : MonoBehaviour
         Stoper();
         LoseScreen();
     }
-
 
     void Stoper()
     {

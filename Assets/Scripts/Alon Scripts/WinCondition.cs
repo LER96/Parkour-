@@ -10,8 +10,8 @@ public class WinCondition : MonoBehaviour
     {
         if (other.transform.CompareTag(ACTIVATION_TAG))
         {
-            //SceneManager.LoadScene(2);
-            Debug.Log("Next Level");
+            SceneManager.LoadScene(1);
+           
         }
     }
 }
