@@ -29,16 +29,13 @@ public class UIHandler : MonoBehaviour
     [SerializeField] TMP_Text timeUI;
     public bool over = false;
 
-
-    private Timer timerCount= new Timer();
-
     public bool isGamePaused = false;
     Resolution[] resolutions;
 
     private void Start()
     {
-        timeLeft = timerCount.time;
         int currentResolutionIndex = 0;
+        Time.timeScale = 1;
 
         resolutions = Screen.resolutions;
         List<string> options = new List<string>();
@@ -182,7 +179,6 @@ public class UIHandler : MonoBehaviour
 
     public void StartGame()
     {
-        //SceneManager.LoadScene(1);
         StartCoroutine(LoadAsync(1));
     }
 
@@ -235,7 +231,7 @@ public class UIHandler : MonoBehaviour
 
     public void LoseScreen()
     {
-        if ( over== true)
+        if (over== true)
         {
             loseCanvas.SetActive(true);
             Debug.Log("lose canvas");
@@ -243,3 +239,4 @@ public class UIHandler : MonoBehaviour
         }
     }
 }
+

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 //using TMPro;
 
-public class Timer
+[System.Serializable]
+public  class Timer : MonoBehaviour
 {
-    public float time;
+    public static float time;
 
-    public Timer()
+    static Timer()
     {
         time = 90;
     }
