@@ -8,9 +8,8 @@ using TMPro;
 
 public class UIHandler : MonoBehaviour
 {
-    [Header("Objects")]
+    [Header("UI *Objects")]
     [SerializeField] GameObject loadingUI;
-    [SerializeField] GameObject winPoints;
     [SerializeField] Image loadingImage;
     [SerializeField] Slider volumeSlider;
     [SerializeField] TMP_Dropdown resolutionsDropdown;
@@ -79,11 +78,6 @@ public class UIHandler : MonoBehaviour
         {
             Stoper();
             LoseScreen();
-        }
-
-        if (winPoints != null)
-        {
-            WinCondition();
         }
     }
 
@@ -246,20 +240,5 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    //general win condition
-    private void WinCondition()
-    { 
-        if (winPoints.transform.tag == ACTIVATION_TAG)
-        {
-            if (SceneManager.GetActiveScene().buildIndex == 2)
-            {
-                StartCoroutine(LoadAsync(1));
-            }
-            else if (SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                StartCoroutine(LoadAsync(0));
-            }
-        }
-    }
 }
 

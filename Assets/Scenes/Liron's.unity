@@ -43314,7 +43314,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingUI: {fileID: 0}
-  winPoints: {fileID: 0}
   loadingImage: {fileID: 0}
   volumeSlider: {fileID: 1375827879}
   resolutionsDropdown: {fileID: 1114222458}

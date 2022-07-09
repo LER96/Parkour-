@@ -944,6 +944,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 293392531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &194556299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194556297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721a8906f5aa80842a68dfad68cb49b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &194656052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,7 +1250,7 @@ PrefabInstance:
     - target: {fileID: 8446228799789922544, guid: 2ef883fb163bdc74295bc760b9dee3d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -212.4
+      value: 168.4
       objectReference: {fileID: 0}
     - target: {fileID: 8446228799789922544, guid: 2ef883fb163bdc74295bc760b9dee3d2,
         type: 3}
@@ -1952,7 +1964,7 @@ GameObject:
   - component: {fileID: 353090215}
   m_Layer: 0
   m_Name: UIHandler
-  m_TagString: Untagged
+  m_TagString: UIHandler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1970,7 +1982,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingUI: {fileID: 1202967425}
-  winPoints: {fileID: 194556297}
   loadingImage: {fileID: 1398307070}
   volumeSlider: {fileID: 2143080106}
   resolutionsDropdown: {fileID: 2071976703}
