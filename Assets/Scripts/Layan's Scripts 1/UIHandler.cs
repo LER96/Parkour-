@@ -14,10 +14,16 @@ public class UIHandler : MonoBehaviour
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject loadingUI;
     [SerializeField] Image loadingImage;
+    [SerializeField] Slider volumeSlider;
 
     [SerializeField] GameObject optionsCanvas;
     [SerializeField] GameObject mainMenuCanvas;
     [SerializeField] TMP_Dropdown resolutionsDropdown;
+    [SerializeField] TMP_Dropdown qualityDropdown;
+
+    [Header("Consts")]
+    const string SAVE_VOLUME = "musicVolume";
+    const string SAVE_QUALITY = "qualitySettings";
 
 
     public bool isGamePaused = false;
@@ -42,11 +48,13 @@ public class UIHandler : MonoBehaviour
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
+        LoadSettings();
     }
 
     private void Update()
     {
         Pause();
+        SaveSettings();
     }
 
     public void Pause()
@@ -72,10 +80,35 @@ public class UIHandler : MonoBehaviour
         }
     }
 
+    public void SetVolume()
+    {
+        AudioListener.volume = volumeSlider.value;
+    }
+
+    //Receives values of what the user inputed
+    private void LoadSettings()
+    {
+        volumeSlider.value = PlayerPrefs.GetFloat(SAVE_VOLUME);
+        qualityDropdown.value = PlayerPrefs.GetInt(SAVE_QUALITY);
+
+    }
+
+    //Saves values of what the user inputed
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetFloat(SAVE_VOLUME, volumeSlider.value);
+        PlayerPrefs.SetInt(SAVE_QUALITY, qualityDropdown.value);
+    }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void SetQuality(int index)
+    {
+        QualitySettings.SetQualityLevel(index);
     }
 
     public void QuitGame()
@@ -131,10 +164,6 @@ public class UIHandler : MonoBehaviour
         mainMenuCanvas.SetActive(true);
     }
 
-    public void SetQuality(int index)
-    {
-        QualitySettings.SetQualityLevel(index);
-    }
 
     public void FullScreen(bool isFullScreenOn)
     {
