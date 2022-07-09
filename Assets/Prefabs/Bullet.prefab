@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7392726293183286906}
-  speed: 2
-  timeToDie: 4
+  speed: 0.5
+  timeToDie: 10
 --- !u!54 &7392726293183286906
 Rigidbody:
   m_ObjectHideFlags: 0
