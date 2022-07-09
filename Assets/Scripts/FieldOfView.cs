@@ -40,7 +40,7 @@ public class FieldOfView : MonoBehaviour
         {
             Transform target = targetsInFieldView[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
-             Vector3 targetPos = Camera.main.WorldToViewportPoint(target.position);
+            Vector3 targetPos = Camera.main.WorldToViewportPoint(target.position);
             if (targetPos.z > 0 && targetPos.z < distanceToGrap && targetPos.x > 0.35f && targetPos.x < 0.65f && targetPos.y > 0 && targetPos.y < 1)
             {
                 float distTarget = Vector3.Distance(transform.position, target.position);

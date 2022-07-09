@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class UIHandler : MonoBehaviour
 {
@@ -30,6 +32,8 @@ public class UIHandler : MonoBehaviour
     public float timeLeft;
     [SerializeField] TMP_Text timeUI;
     public bool over = false;
+
+    [SerializeField] string json;
 
     public bool isGamePaused = false;
     Resolution[] resolutions;
@@ -169,6 +173,10 @@ public class UIHandler : MonoBehaviour
         QualitySettings.SetQualityLevel(index);
     }
 
+
+    //Canvas UI
+    //Main Menu
+
     public void QuitGame()
     {
         Application.Quit();
@@ -198,6 +206,56 @@ public class UIHandler : MonoBehaviour
         }
     }
 
+    public void Options()
+    {
+        optionsCanvas.SetActive(true);
+        mainMenuCanvas.SetActive(false);
+    }
+
+    //Pause
+    //Json
+    public static void BinarySave()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/player.nice";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        Progress pro = new Progress();
+        int y = SceneManager.GetActiveScene().buildIndex;
+        pro.level = y;
+        formatter.Serialize(stream, pro);
+        stream.Close();
+
+        //JsonProgress progress = new JsonProgress();
+        //int y = SceneManager.GetActiveScene().buildIndex;
+        //progress.level = y;
+        //json = JsonUtility.ToJson(progress);
+        ////File.WriteAllText(Application.persistentDataPath + "/JsonProgress.json", json);
+        //Debug.Log(json);
+    }
+    public void BinaryLoad()
+    {
+        string path = Application.persistentDataPath + "/player.nice";
+        if(File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            Progress pro= formatter.Deserialize(stream) as Progress;
+            stream.Close();
+            StartCoroutine(LoadAsync(pro.level));
+        }
+        else
+        {
+            Debug.LogError("Not Found" + path);
+            //return null;
+        }
+        //Progress loadProgress = JsonUtility.FromJson<Progress>(json);
+        //int y = loadProgress.level;
+        //Debug.Log("Loaded");
+        //StartCoroutine(LoadAsync(y));
+    }
+    // 
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -208,12 +266,6 @@ public class UIHandler : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void Options()
-    {
-        optionsCanvas.SetActive(true);
-        mainMenuCanvas.SetActive(false);
     }
 
     public void LoadMainMenu()
@@ -232,6 +284,7 @@ public class UIHandler : MonoBehaviour
         Screen.fullScreen = isFullScreenOn;
     }
 
+    //Win/Lose
     public void LoseScreen()
     {
         if (over== true)
@@ -249,5 +302,15 @@ public class UIHandler : MonoBehaviour
         winCanvas.SetActive(true);
         Time.timeScale = 0;
     }
+
 }
+[System.Serializable]
+public class Progress
+{
+    public int level;
+
+    //public Vector3 potision;
+    //public Quaternion rotation;
+}
+
 
