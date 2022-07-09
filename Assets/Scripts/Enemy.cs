@@ -1,85 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using System;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float radiusVis;
+    [SerializeField] float radius;
+    [SerializeField] bool islooking;
+    [SerializeField] LayerMask isObs; 
+
+    [SerializeField] Transform targert;
+    [SerializeField] Transform bullet;
+    [SerializeField] bool attacked;
     [SerializeField] float delay;
-    [SerializeField] LayerMask isObs;
-    [SerializeField] Animator shootAnimation;
-    [SerializeField] Transform target;
-    [SerializeField] Transform hand;
-    [SerializeField] Transform pointShoot;
-    [SerializeField] Transform bulletPrefab;
-    [SerializeField] Transform lookpoint;
-    bool inrange;
-    bool islooking;
-    float distance;
+    [SerializeField] Transform shootPoint;
+    [SerializeField] Transform lookPoint;
 
+    //[SerializeField] NavMeshAgent agent;
+
+    [SerializeField] float distance;
+    Vector3 newPos;
     Vector3 targetDir;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine("LookingFor");
-    }
-
-    IEnumerator LookingFor()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(delay);
-            if(inrange)
-            {
-                Onsight();
-            }
-        }
-    }
 
     private void Update()
     {
-        InRange();
-        if(inrange)
+        distance = Vector3.Distance(lookPoint.position, targert.position);
+        if (distance <= radius)
         {
-            transform.LookAt(target);
+            CheckOnSight();
         }
     }
 
-    void InRange()
+    private void CheckOnSight()
     {
-        distance = Vector3.Distance(transform.position, target.position);
-        if (distance <= radiusVis)
+        targetDir = (lookPoint.position - targert.position).normalized;
+        RaycastHit hit;
+        if (!Physics.Raycast(lookPoint.position, targetDir, out hit, distance, isObs))
         {
-            inrange = true;
+            islooking = true;
+            transform.LookAt(targert);
+            shootPoint.LookAt(targert);
+            Shooting();
         }
         else
-            inrange = false;
+            islooking = false;
     }
 
-    void Onsight()
+    void Shooting()
     {
-        targetDir = (lookpoint.position - target.position).normalized;
-        if (Physics.Raycast(lookpoint.position, targetDir, distance, isObs))
+        
+        if(!attacked)
         {
-            return;
-        }
-        else
-        {
-            hand.LookAt(target);
-            Shoot();
-
+            attacked = true;
+            Instantiate(bullet, shootPoint.position, shootPoint.rotation);
+            Invoke(nameof(ResetShoot), delay);
         }
     }
 
-    void Shoot()
+    void ResetShoot()
     {
-        Instantiate(bulletPrefab, pointShoot.position, pointShoot.rotation);
+        attacked = false;
     }
+
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, radiusVis);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
