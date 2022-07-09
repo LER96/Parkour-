@@ -25,18 +25,19 @@ public class UIHandler : MonoBehaviour
     const string SAVE_QUALITY = "qualitySettings";
 
     [Header("Timer")]
-    public float timeLeft = 10;
-    public TMP_Text timeUI;
+    public float timeLeft;
+    [SerializeField] TMP_Text timeUI;
     public bool over = false;
 
 
-    private Timer timerCount;
+    private Timer timerCount= new Timer();
 
     public bool isGamePaused = false;
     Resolution[] resolutions;
 
     private void Start()
     {
+        timeLeft = timerCount.time;
         int currentResolutionIndex = 0;
 
         resolutions = Screen.resolutions;
@@ -75,8 +76,11 @@ public class UIHandler : MonoBehaviour
     {
         Pause();
         SaveSettings();
-        Stoper();
-        LoseScreen();
+        if (timeUI != null)
+        {
+            Stoper();
+            LoseScreen();
+        }
     }
 
     void Stoper()
@@ -231,7 +235,7 @@ public class UIHandler : MonoBehaviour
 
     public void LoseScreen()
     {
-        if (over == true)
+        if ( over== true)
         {
             loseCanvas.SetActive(true);
             Debug.Log("lose canvas");
