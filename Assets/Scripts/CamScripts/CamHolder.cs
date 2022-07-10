@@ -7,7 +7,6 @@ public class CamHolder : MonoBehaviour
     public Transform camPosition;
     [SerializeField]  PlayerMovement1 wR;
 
-
     private void Start()
     {
 
@@ -22,6 +21,7 @@ public class CamHolder : MonoBehaviour
         }
         else
         {
+            transform.parent = null;
             transform.position = camPosition.position;
         }
     }
