@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
     public void Tutorial()
     {
         //loads to tutorial with the corutine
-        StartCoroutine(LoadAsync(2));
+        StartCoroutine(LoadAsync(3));
     }
     
     public void StartGame()
@@ -278,7 +278,7 @@ public class GameManager : MonoBehaviour
     public void NextLvl()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     //go back to main menu

@@ -17,11 +17,11 @@ public class WinCondition : MonoBehaviour
     {
         if (other.transform.tag == ACTIVATION_TAG)
         {
-            if (SceneManager.GetActiveScene().buildIndex == 2)
+            if (SceneManager.GetActiveScene().buildIndex == 3)
             {
                 StartCoroutine(loading.LoadAsync(1));
             }
-            else if (SceneManager.GetActiveScene().buildIndex == 1)
+            else if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
             {
                 loading.WinScreen();
             }
