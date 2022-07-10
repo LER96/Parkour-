@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6286458644575861615, guid: 56a39c4a1e8e79b4c9156a21bc723b6b,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8675545689848397403, guid: 56a39c4a1e8e79b4c9156a21bc723b6b,
         type: 3}
       propertyPath: radius

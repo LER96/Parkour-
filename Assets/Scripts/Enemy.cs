@@ -20,8 +20,16 @@ public class Enemy : MonoBehaviour
     //[SerializeField] NavMeshAgent agent;
 
     [SerializeField] float distance;
+
+    AudioSource shootingEffect;
+
     Vector3 newPos;
     Vector3 targetDir;
+
+    private void Start()
+    {
+        shootingEffect = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -54,6 +62,7 @@ public class Enemy : MonoBehaviour
         {
             attacked = true;
             Instantiate(bullet, shootPoint.position, shootPoint.rotation);
+            shootingEffect.Play();
             Invoke(nameof(ResetShoot), delay);
         }
     }
