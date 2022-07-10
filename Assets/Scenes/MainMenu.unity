@@ -5220,7 +5220,7 @@ GameObject:
   - component: {fileID: 1739232652}
   - component: {fileID: 1739232653}
   m_Layer: 0
-  m_Name: UIHandler
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5265,6 +5265,7 @@ MonoBehaviour:
   timeLeft: 0
   timeUI: {fileID: 0}
   over: 0
+  playerWon: 0
   json: 
   isGamePaused: 0
 --- !u!1 &1775879802

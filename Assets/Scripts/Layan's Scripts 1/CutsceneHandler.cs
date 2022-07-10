@@ -26,6 +26,7 @@ public class CutsceneHandler : MonoBehaviour
     {
         skipIntro.text = "Press F to skip";
 
+        //getting references for player and cam to deactivate them
         player = playerReference.GetComponent<PlayerMovement1>();
         playerCam = mainCamera.GetComponent<PlayerCamMovement>();
         player.enabled = false;
@@ -46,6 +47,7 @@ public class CutsceneHandler : MonoBehaviour
             cutscene.time = _skipIntro;
             skipIntro.enabled = false;
         }
+        //if cutscene is done, enable scripts and game
         else if (cutscene.state != PlayState.Playing)
         {
             player.enabled = true;

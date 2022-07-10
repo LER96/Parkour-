@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class WinCondition : MonoBehaviour
 {
-    UIHandler loading;
+    GameManager loading;
     const string ACTIVATION_TAG = "Player";
 
     private void Start()
     {
-        loading = GameObject.FindGameObjectWithTag("UIHandler").GetComponent<UIHandler>();
+        loading = GameObject.FindGameObjectWithTag("UIHandler").GetComponent<GameManager>();
     }
 
     private void OnTriggerEnter(Collider other)

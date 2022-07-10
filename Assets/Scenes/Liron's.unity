@@ -1958,7 +1958,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1612955979}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: NextLvl
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -44237,7 +44237,7 @@ GameObject:
   - component: {fileID: 1612955981}
   - component: {fileID: 1612955979}
   m_Layer: 0
-  m_Name: 'UIHandler '
+  m_Name: GameManager
   m_TagString: UIHandler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44267,6 +44267,7 @@ MonoBehaviour:
   timeLeft: 180
   timeUI: {fileID: 286710154}
   over: 0
+  playerWon: 0
   json: 
   isGamePaused: 0
 --- !u!4 &1612955981
@@ -54776,9 +54777,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1612955978}
+      - m_Target: {fileID: 1612955979}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: NextLvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -56376,7 +56377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049039978}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

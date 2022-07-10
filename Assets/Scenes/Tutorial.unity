@@ -1963,7 +1963,7 @@ GameObject:
   - component: {fileID: 353090216}
   - component: {fileID: 353090215}
   m_Layer: 0
-  m_Name: UIHandler
+  m_Name: GameManager
   m_TagString: UIHandler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1989,9 +1989,12 @@ MonoBehaviour:
   optionsCanvas: {fileID: 1970954864}
   mainMenuCanvas: {fileID: 718370610}
   loseCanvas: {fileID: 0}
+  winCanvas: {fileID: 0}
   timeLeft: 10
   timeUI: {fileID: 0}
   over: 0
+  playerWon: 0
+  json: 
   isGamePaused: 0
 --- !u!4 &353090216
 Transform:

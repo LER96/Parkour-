@@ -8,7 +8,7 @@ using TMPro;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class UIHandler : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [Header("UI *Objects")]
     [SerializeField] GameObject loadingUI;
@@ -32,6 +32,7 @@ public class UIHandler : MonoBehaviour
     public float timeLeft;
     [SerializeField] TMP_Text timeUI;
     public bool over = false;
+    public bool playerWon = false;
 
     [SerializeField] string json;
 
@@ -120,10 +121,13 @@ public class UIHandler : MonoBehaviour
         }
     }
 
+    //pause option
     public void Pause()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0 && over == false)
+        //if scene isnt main menu, and player didnt win/lose, you can pause
+        if (SceneManager.GetActiveScene().buildIndex != 0 && over == false && playerWon == false)
         {
+            //if player presses escape and game isnt paused, pause
             if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == false)
             {
                 isGamePaused = true;
@@ -131,6 +135,7 @@ public class UIHandler : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Confined;
                 Time.timeScale = 0;
             }
+            //if player presses escape and game is paused, unpause
             else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == true)
             {
                 isGamePaused = false;
@@ -147,7 +152,6 @@ public class UIHandler : MonoBehaviour
     {
         volumeSlider.value = PlayerPrefs.GetFloat(SAVE_VOLUME);
         qualityDropdown.value = PlayerPrefs.GetInt(SAVE_QUALITY);
-
     }
 
     //Saves values of what the user inputed
@@ -157,62 +161,69 @@ public class UIHandler : MonoBehaviour
         PlayerPrefs.SetInt(SAVE_QUALITY, qualityDropdown.value);
     }
 
+    //general volume control
     public void SetVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
 
+    //choosing resolution for the game
     public void SetResolution(int resolutionIndex)
     {
+        //gets the index of the drop down and puts all the possible resolution
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    //setting quality
     public void SetQuality(int index)
     {
+        //takes the index of the dropdown in unity
         QualitySettings.SetQualityLevel(index);
     }
 
-
-    //Canvas UI
-    //Main Menu
-
+    //quit button
     public void QuitGame()
     {
         Application.Quit();
     }
-
+    //option to choose tutorial
     public void Tutorial()
     {
+        //loads to tutorial with the corutine
         StartCoroutine(LoadAsync(2));
     }
     
-    private void StartGame()
+    public void StartGame()
     {
+        //loads the game with corutine
         StartCoroutine(LoadAsync(1));
     }
 
+    //Loading 
     public IEnumerator LoadAsync(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         loadingUI.SetActive(true);
 
+        //while the scene didnt finish loading yet
         while (operation.isDone == false)
         {
+            //progress the bar based on the operation progress
             float barProgress = Mathf.Clamp01(operation.progress / 0.9f);
             loadingImage.fillAmount = barProgress;
             yield return null;
         }
     }
 
+    //options menu
     public void Options()
     {
         optionsCanvas.SetActive(true);
         mainMenuCanvas.SetActive(false);
     }
 
-    //Pause
     //Json
     public static void BinarySave()
     {
@@ -255,30 +266,35 @@ public class UIHandler : MonoBehaviour
         //Debug.Log("Loaded");
         //StartCoroutine(LoadAsync(y));
     }
-    // 
+    
+    //restart scene
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
 
+    //go to next level when you win
     public void NextLvl()
     {
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    //go back to main menu
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
     }
 
+    //back button from options
     public void Back()
     {
         optionsCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }
 
+    //set game to full screen
     public void FullScreen(bool isFullScreenOn)
     {
         Screen.fullScreen = isFullScreenOn;
@@ -301,6 +317,7 @@ public class UIHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         winCanvas.SetActive(true);
         Time.timeScale = 0;
+        playerWon = true;
     }
 
 }
