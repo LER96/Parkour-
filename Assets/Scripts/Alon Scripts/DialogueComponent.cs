@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueComponent : MonoBehaviour
 {
+   // Usage of singelton to assign all objects of the prefab this component at start
     #region Singelton
 
     public static DialogueComponent instance;

@@ -12,12 +12,14 @@ public class WaypointTrigger : MonoBehaviour
 
     private void Start()
     {
+        // Using the singelton to get the Dialogue component
         dialogue = DialogueComponent.instance.dialogueManager;
         dialogueScript = dialogue.GetComponent<DialogueManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // If player triggers waypoint, update to next prompt
         if (other.transform.CompareTag(ACTIVATION_TAG) && dialogueScript.index != dialogueScript.tutorialPrompts.Length - 1)
         {
             dialogueScript.index++;

@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        // Starts the tutorial prompts
         dialogueBox.SetActive(true);
         StartCoroutine(Type());
         index = _originalIndex;
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
+        // Checks if the player reached a tutorial waypoint, if so, updates prompt
         if (index != _originalIndex)
         {
             text.text = "";
@@ -38,6 +40,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Creates the appearing letters effect
     IEnumerator Type()
     {
         foreach (char letter in tutorialPrompts[index].ToCharArray())
