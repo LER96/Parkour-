@@ -14,24 +14,28 @@ public class CutsceneHandler : MonoBehaviour
     [SerializeField] GameObject cutsceneCamera;
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject playerReference;
+    [SerializeField] GameObject gameManagerReference;
+    [SerializeField] GameObject enemies;
 
     [Header("References")]
-    private PlayerMovement1 player;
-    private PlayerCamMovement playerCam;
+    private PlayerMovement1 _player;
+    private PlayerCamMovement _playerCam;
+    private GameManager _gameManager;
 
     [Header("UI")]
-    public TMP_Text skipIntro;
+    public TMP_Text skipIntroText;
 
     private void Start()
     {
-        skipIntro.text = "Press F to skip";
-
+        skipIntroText.text = "Press F to skip";
         //getting references for player and cam to deactivate them
-        player = playerReference.GetComponent<PlayerMovement1>();
-        playerCam = mainCamera.GetComponent<PlayerCamMovement>();
-        player.enabled = false;
-        player.animator.enabled = false;
-        playerCam.enabled = false;
+        _player = playerReference.GetComponent<PlayerMovement1>();
+        _playerCam = mainCamera.GetComponent<PlayerCamMovement>();
+        _gameManager = gameManagerReference.GetComponent<GameManager>();
+        enemies.SetActive(false);
+        _player.enabled = false;
+        _player.animator.enabled = false;
+        _playerCam.enabled = false;
         cutscene = GetComponent<PlayableDirector>();
     }
 
@@ -45,17 +49,21 @@ public class CutsceneHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             cutscene.time = _skipIntro;
-            skipIntro.enabled = false;
+            skipIntroText.enabled = false;
+            _gameManager.canStartTimer = true;
+            enemies.SetActive(true);
         }
         //if cutscene is done, enable scripts and game
         else if (cutscene.state != PlayState.Playing)
         {
-            player.enabled = true;
-            player.animator.enabled = true;
+            _player.enabled = true;
+            _player.animator.enabled = true;
             cutsceneCamera.SetActive(false);
-            playerCam.enabled = true;
+            _playerCam.enabled = true;
             Debug.Log("done");
-            skipIntro.enabled = false;
+            skipIntroText.enabled = false;
+            _gameManager.canStartTimer = true;
+            enemies.SetActive(true);
         }
     }
 

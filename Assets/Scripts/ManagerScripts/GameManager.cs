@@ -32,7 +32,10 @@ public class GameManager : MonoBehaviour
     public float timeLeft;
     [SerializeField] TMP_Text timeUI;
     public bool over = false;
+
+    [Header("Bools")]
     public bool playerWon = false;
+    public bool canStartTimer = false;
 
     [SerializeField] string json;
 
@@ -89,35 +92,38 @@ public class GameManager : MonoBehaviour
 
     void Stoper()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft > 0 && timeLeft > 60)
+        if (canStartTimer == true)
         {
-            var minutes = Mathf.FloorToInt(timeLeft / 60);
-            var seconds = Mathf.FloorToInt(timeLeft % 60);
-            if (seconds < 10)
+            timeLeft -= Time.deltaTime;
+            if (timeLeft > 0 && timeLeft > 60)
             {
-                timeUI.text = minutes + ":0" + seconds;
+                var minutes = Mathf.FloorToInt(timeLeft / 60);
+                var seconds = Mathf.FloorToInt(timeLeft % 60);
+                if (seconds < 10)
+                {
+                    timeUI.text = minutes + ":0" + seconds;
+                }
+                else
+                {
+                    timeUI.text = minutes + ":" + seconds;
+                }
+                over = false;
             }
-            else
+            else if (timeLeft < 60 && timeLeft > 0)
             {
-                timeUI.text = minutes + ":" + seconds;
+                Debug.Log("test");
+                var seconds = Mathf.FloorToInt(timeLeft % 60);
+                timeUI.text = "" + seconds;
+                over = false;
             }
-            over = false;
-        }
-        else if (timeLeft < 60 && timeLeft > 0)
-        {
-            Debug.Log("test");
-            var seconds = Mathf.FloorToInt(timeLeft % 60);
-            timeUI.text = "" + seconds;
-            over = false;
-        }
-        else if (timeLeft <= 0)
-        {
-            over = true;
-            Debug.Log("over");
-            timeLeft = 0;
-            timeUI.text = "Times UP! Game OVER";
-            //Time.timeScale = 0; 
+            else if (timeLeft <= 0)
+            {
+                over = true;
+                Debug.Log("over");
+                timeLeft = 0;
+                timeUI.text = "Times UP! Game OVER";
+                //Time.timeScale = 0; 
+            }
         }
     }
 
@@ -244,6 +250,7 @@ public class GameManager : MonoBehaviour
         ////File.WriteAllText(Application.persistentDataPath + "/JsonProgress.json", json);
         //Debug.Log(json);
     }
+
     public void BinaryLoad()
     {
         string path = Application.persistentDataPath + "/player.nice";
