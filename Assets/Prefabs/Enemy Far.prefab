@@ -14,13 +14,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675545689848397403, guid: 56a39c4a1e8e79b4c9156a21bc723b6b,
         type: 3}
-      propertyPath: delay
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8675545689848397403, guid: 56a39c4a1e8e79b4c9156a21bc723b6b,
-        type: 3}
       propertyPath: radius
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8675545689848397414, guid: 56a39c4a1e8e79b4c9156a21bc723b6b,
         type: 3}

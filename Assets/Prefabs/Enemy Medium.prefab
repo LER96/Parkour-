@@ -10,17 +10,12 @@ PrefabInstance:
     - target: {fileID: 105144232931696712, guid: 18365ec864bafb148bea8e39b9937932,
         type: 3}
       propertyPath: delay
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 105144232931696712, guid: 18365ec864bafb148bea8e39b9937932,
         type: 3}
       propertyPath: radius
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 105144232931696712, guid: 18365ec864bafb148bea8e39b9937932,
-        type: 3}
-      propertyPath: isObs.m_Bits
-      value: 767
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 105144232931696756, guid: 18365ec864bafb148bea8e39b9937932,
         type: 3}
