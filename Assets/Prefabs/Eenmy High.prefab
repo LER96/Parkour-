@@ -70,12 +70,12 @@ PrefabInstance:
     - target: {fileID: 122345085968977258, guid: fe6eadaacfe22d1449cc07d2bfe84524,
         type: 3}
       propertyPath: delay
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 122345085968977258, guid: fe6eadaacfe22d1449cc07d2bfe84524,
         type: 3}
       propertyPath: radius
-      value: 130
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3945077703574819208, guid: fe6eadaacfe22d1449cc07d2bfe84524,
         type: 3}
