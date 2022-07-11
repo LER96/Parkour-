@@ -10,6 +10,16 @@ public class CamHolder : MonoBehaviour
 
     private void Update()
     {
-        transform.position = camPosition.position;
+        if (wR.wallRunning)
+        {
+            
+            transform.SetParent(camPosition);
+            transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            transform.parent = null;
+            transform.position = camPosition.position;
+        }
     }
 }

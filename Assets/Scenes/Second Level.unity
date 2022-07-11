@@ -3604,7 +3604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camPosition: {fileID: 1669392573}
-  wR: {fileID: 0}
+  wR: {fileID: 497052154}
   originalPose: {fileID: 0}
 --- !u!114 &330585549
 MonoBehaviour:
