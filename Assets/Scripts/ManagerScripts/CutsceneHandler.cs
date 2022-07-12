@@ -12,6 +12,7 @@ public class CutsceneHandler : MonoBehaviour
     [SerializeField] PlayableDirector cutscene;
     [SerializeField] private double _skipIntro = 40f;
     [SerializeField] GameObject cutsceneCamera;
+    [SerializeField] GameObject secondCutsceneCamera;
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject playerReference;
     [SerializeField] GameObject gameManagerReference;
@@ -64,6 +65,10 @@ public class CutsceneHandler : MonoBehaviour
             skipIntroText.enabled = false;
             _gameManager.canStartTimer = true;
             enemies.SetActive(true);
+            if (secondCutsceneCamera != null)
+            {
+                secondCutsceneCamera.SetActive(false);
+            }
         }
     }
 
