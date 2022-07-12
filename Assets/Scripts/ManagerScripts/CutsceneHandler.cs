@@ -54,7 +54,7 @@ public class CutsceneHandler : MonoBehaviour
             _gameManager.canStartTimer = true;
             enemies.SetActive(true);
         }
-        //if cutscene is done, enable scripts and game
+        //if cutscene is done, enable scripts and game + disable the extra cameras
         else if (cutscene.state != PlayState.Playing)
         {
             _player.enabled = true;
