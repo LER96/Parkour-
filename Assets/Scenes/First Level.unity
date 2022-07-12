@@ -14682,7 +14682,7 @@ GameObject:
   - component: {fileID: 554284214}
   - component: {fileID: 554284213}
   - component: {fileID: 554284212}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: building2_pCube33 (9)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -41315,7 +41315,7 @@ GameObject:
   - component: {fileID: 1499555039}
   - component: {fileID: 1499555038}
   - component: {fileID: 1499555037}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: building2_pCube33 (8)
   m_TagString: Ground
   m_Icon: {fileID: 0}
