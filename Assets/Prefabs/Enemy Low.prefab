@@ -233,7 +233,7 @@ MonoBehaviour:
   islooking: 0
   isObs:
     serializedVersion: 2
-    m_Bits: 200
+    m_Bits: 767
   targert: {fileID: 0}
   bullet: {fileID: 5998055985083889013, guid: c4fee4386a02f774788c53a76eedd18f, type: 3}
   attacked: 0

@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: radius
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 105144232931696712, guid: 18365ec864bafb148bea8e39b9937932,
+        type: 3}
+      propertyPath: isObs.m_Bits
+      value: 767
+      objectReference: {fileID: 0}
     - target: {fileID: 105144232931696756, guid: 18365ec864bafb148bea8e39b9937932,
         type: 3}
       propertyPath: m_Name

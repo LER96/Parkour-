@@ -17840,7 +17840,6 @@ GameObject:
   - component: {fileID: 1419802037}
   - component: {fileID: 1419802036}
   - component: {fileID: 1419802035}
-  - component: {fileID: 1419802038}
   m_Layer: 6
   m_Name: wall9 (1)
   m_TagString: Untagged
@@ -17927,26 +17926,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419802032}
   m_Mesh: {fileID: 8982024885491046897, guid: 66b9c7e71d472c34592892ca053b869d, type: 3}
---- !u!95 &1419802038
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419802032}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 924bbc3cffe089648874c668e8a37ff3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1429430422
 GameObject:
   m_ObjectHideFlags: 0
@@ -26656,7 +26635,6 @@ GameObject:
   - component: {fileID: 6012544592722758149}
   - component: {fileID: 8991670949322753669}
   - component: {fileID: 8991670949322753670}
-  - component: {fileID: 8991670949322753671}
   m_Layer: 6
   m_Name: wall9
   m_TagString: Untagged
@@ -27920,7 +27898,6 @@ GameObject:
   - component: {fileID: 1854327802518136251}
   - component: {fileID: 3020552158686134092}
   - component: {fileID: 7468077158919846454}
-  - component: {fileID: 7468077158919846455}
   m_Layer: 3
   m_Name: pCube25
   m_TagString: Untagged
@@ -30608,7 +30585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8839120789416849365}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 266.90002, y: 0, z: 0}
+  m_LocalPosition: {x: 262, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30916,8 +30893,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2252955306834138883}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 431.15, y: -12, z: 0}
-  m_LocalScale: {x: 1.1644, y: 1, z: 1}
+  m_LocalPosition: {x: 655, y: -12, z: 0}
+  m_LocalScale: {x: 1.393059, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450653616519882}
@@ -30937,26 +30914,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1274251057333091914, guid: 66b9c7e71d472c34592892ca053b869d, type: 3}
---- !u!95 &7468077158919846455
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2252955306834138883}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 706ebcad4f0664f41bfc49e4b1d2a2a9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7519898546224403246
 GameObject:
   m_ObjectHideFlags: 0
@@ -31407,7 +31364,6 @@ GameObject:
   - component: {fileID: 3804568323700450840}
   - component: {fileID: 9006330723086038884}
   - component: {fileID: 9006330723086038885}
-  - component: {fileID: 9006330723086038886}
   m_Layer: 3
   m_Name: pCube24
   m_TagString: Untagged
@@ -32308,26 +32264,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8982024885491046897, guid: 66b9c7e71d472c34592892ca053b869d, type: 3}
---- !u!95 &8991670949322753671
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254881991364768099}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 924bbc3cffe089648874c668e8a37ff3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!33 &8994813000252742762
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -32406,26 +32342,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -832606143848720121, guid: 66b9c7e71d472c34592892ca053b869d, type: 3}
---- !u!95 &9006330723086038886
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8152927876065640750}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 10bd40b86e685844a974502e5be4de0c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9019515343864952680
 GameObject:
   m_ObjectHideFlags: 0

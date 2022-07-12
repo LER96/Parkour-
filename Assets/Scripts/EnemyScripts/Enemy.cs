@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
         }
         else
             islooking = false;
+
+        Debug.Log(""+islooking);
     }
 
     void Shooting()
