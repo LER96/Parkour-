@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     {
         targetDir = (lookPoint.position - targert.position).normalized;
         RaycastHit hit;
-        if (!Physics.Raycast(lookPoint.position, targetDir, out hit, distance, isObs, QueryTriggerInteraction.UseGlobal))
+        if (!Physics.Raycast(lookPoint.position, targetDir, out hit, distance, isObs, QueryTriggerInteraction.Collide))
         {
             islooking = true;
             transform.LookAt(targert);
