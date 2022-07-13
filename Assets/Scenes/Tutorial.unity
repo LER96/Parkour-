@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589245, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1905,7 +1905,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camPosition: {fileID: 194656053}
-  wR: {fileID: 1583565406}
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1995,6 +1994,7 @@ MonoBehaviour:
   timeUI: {fileID: 0}
   over: 0
   playerWon: 0
+  canStartTimer: 0
   json: 
   isGamePaused: 0
 --- !u!4 &353090216
@@ -4375,8 +4375,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919027476}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.70712, y: -14.8229, z: 266.9007}
-  m_LocalScale: {x: 13.586007, y: 1, z: 38.758938}
+  m_LocalPosition: {x: -38.70712, y: -14.8229, z: 276.0571}
+  m_LocalScale: {x: 13.586007, y: 1, z: 60.91256}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 895548713}
@@ -8085,7 +8085,7 @@ MonoBehaviour:
   obsMask:
     serializedVersion: 2
     m_Bits: 72
-  distanceToGrap: 100
+  distanceToGrap: 55
   delay: 0.2
   visibleTargets: []
 --- !u!114 &1583565403
@@ -8109,8 +8109,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxGrapDist: 50
-  dropDist: 3
-  hookingSpeed: 2
+  dropDist: 5
+  hookingSpeed: 4
   rb: {fileID: 1583565408}
   ready: 0
   redCross: {fileID: 1962812872}
@@ -8676,7 +8676,7 @@ PrefabInstance:
     - target: {fileID: 8446228799789922544, guid: 2ef883fb163bdc74295bc760b9dee3d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -267.6
+      value: -249.4
       objectReference: {fileID: 0}
     - target: {fileID: 8446228799789922544, guid: 2ef883fb163bdc74295bc760b9dee3d2,
         type: 3}
