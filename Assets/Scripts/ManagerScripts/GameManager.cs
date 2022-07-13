@@ -284,7 +284,6 @@ public class GameManager : MonoBehaviour
     //go to next level when you win
     public void NextLvl()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
