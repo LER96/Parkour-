@@ -17,12 +17,13 @@ public class FieldOfView : MonoBehaviour
 
     public List<Transform> visibleTargets = new List<Transform>();
 
-
+    //To manage drop some code on each frame, we start the script with a coountine
     private void Start()
     {
         StartCoroutine("FindTargets", delay);
     }
 
+    //set an infinate loop that check each number of seconds if the player did catch something on sight
     IEnumerator FindTargets(float delay)
     {
         while(true)
@@ -35,23 +36,31 @@ public class FieldOfView : MonoBehaviour
     void FindVisibleTargets()
     {
         visibleTargets.Clear();
+        //set an array of all the object, with the specific layer, that entered the cast sphere
         Collider[] targetsInFieldView = Physics.OverlapSphere(transform.position, viewRadius, grapMask);
         for(int i=0; i< targetsInFieldView.Length; i++)
         {
             Transform target = targetsInFieldView[i].transform;
+            //sets the dirrection of the player to the target
             Vector3 dirToTarget = (target.position - transform.position).normalized;
+            //gets the location of the target, that enerted the camera view
             Vector3 targetPos = Camera.main.WorldToViewportPoint(target.position);
+            //if the position is on the middle of the camera view// that means the player is looking right at it
             if (targetPos.z > 0 && targetPos.z < distanceToGrap && targetPos.x > 0.35f && targetPos.x < 0.65f && targetPos.y > 0 && targetPos.y < 1)
             {
+                //check the distance
                 float distTarget = Vector3.Distance(transform.position, target.position);
+                //cast a ray that make sure that the target is not hiding behind anything
                 if(!Physics.Raycast(transform.position, dirToTarget, distTarget, obsMask))
                 {
+                    //add to the targets list
                     visibleTargets.Add(target);
                 }
             }
         }
     }
 
+    //always make sure that the field of view is with the player rotation/position
     public Vector3 DirFromAngle(float angleInDegree, bool angelIsGlobal)
     {
         if(!angelIsGlobal)

@@ -19,23 +19,20 @@ public class Grappling : MonoBehaviour
     bool isGrappling;
 
 
-
-    //Vector3 targetPos;
     FieldOfView fow;
     public bool ready;
     [SerializeField] GameObject redCross;
     Transform target;
     public List<Transform> grapOnSight = new List<Transform>();
 
-    //List<GameObject> grapInGame = new List<GameObject>();
-
-
     private void Start()
     {
+        //sets the hook into the hand position
         hook.position = handPos.position;
     }
     private void Update()
     {
+
         CheckOnSight();
         LockOn();
         if (Input.GetMouseButtonDown((0)))
@@ -64,11 +61,13 @@ public class Grappling : MonoBehaviour
         }
     }
 
+    //takes the target lists from the field of view script
     void CheckOnSight()
     {
         fow = GetComponent<FieldOfView>();
         if (fow.visibleTargets.Count > 0)
         {
+            //duplicate the list
             foreach (Transform onTarget in fow.visibleTargets)
             {
                 if (grapOnSight.Count < fow.visibleTargets.Count)
@@ -79,54 +78,16 @@ public class Grappling : MonoBehaviour
         }
         else
         {
+            //delete the list
             grapOnSight.Clear();
         }
-        //    if(grapInGame.Count>0)
-        //    {
-        //        for(int i=0; i< grapInGame.Count; i++)
-        //        {
-        //            //takes the position of the object
-        //            targetPos = Camera.main.WorldToViewportPoint(grapInGame[i].transform.localPosition);
-        //            //if the object is in the range of sight (moves between 0-1)
-        //            if (targetPos.z > 0 && targetPos.z<100 && targetPos.x > 0.35f && targetPos.x < 0.65f && targetPos.y > 0 && targetPos.y < 1)
-        //            {
-        //                //we cant have more grapling on sight then the game 
-        //                if (grapOnSight.Count < grapInGame.Count)
-        //                {
-        //                    grapOnSight.Add(grapInGame[i]);
-        //                }
-        //            }
-        //            //checks if it already 
-        //            else if (grapOnSight.Contains(grapInGame[i]))
-        //            {
-        //                grapOnSight.Remove(grapInGame[i]); 
-        //            }
-        //        }
-        //    }
-        //    //Debug.Log("" + grapOnSight.Count);
     }
 
 
 
 void LockOn()
     {
-        //if (grapOnSight.Count > 0 && !locked && ready)
-        //{
-        //    locked = true;
-        //    redCross.SetActive(true);
-        //}
-        //if (locked && grapOnSight.Count == 0)
-        //{
-        //    locked = false;
-        //    redCross.SetActive(false);
-        //    //ready = false;
-        //}
-        //if (locked && grapOnSight.Count > 0 && ready)
-        //{
-        //    target = grapOnSight[0].transform;
-        //    redCross.transform.position = Camera.main.WorldToScreenPoint(target.position);
-        //    //ready = true;
-        //}
+        //set the target icon onto the target position
         if(grapOnSight.Count>0)
         {
             redCross.SetActive(true);
@@ -136,7 +97,6 @@ void LockOn()
         }
         else
         {
-            //locked = false;
             redCross.SetActive(false);
             ready = false;
         }
@@ -146,45 +106,39 @@ void LockOn()
     //check if we hit the grappling point
     void ShootHook()
     {
-
+        // if one of them is true
         if (isShooting || isGrappling) return;
 
+        //if not// the player is ready to shoot again
         isShooting = true;
+        //if the player is looking at the target// then we're ready to shoot
         if (ready)
         {
+            //hookpoint is the hook last position
             hookpoint = target.position;
             isGrappling = true;
+            //hook becomes an object of his own// like a bullet
             hook.parent = null;
             hook.LookAt(hookpoint);
             print("Hit");
+            //draw the line
             lineRender.enabled = true;
         }
         isShooting = false;
-
-        //RaycastHit hit;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray, out hit, maxGrapDist, grapmask))
-        //{
-        //    hookpoint = hit.point;
-        //    isGrappling = true;
-        //    hook.parent = null;
-        //    hook.LookAt(hookpoint);
-        //    print("Hit");
-        //    lineRender.enabled = true;
-        //}
-
-        //isShooting = false;
     }
 
     //if the hook touches the grapling Mask...
     //then set the body destenation to the hook point
     void Grap()
     {
+        //create a smooth transition of the hook to the hookpoint 
         hook.position = Vector3.Lerp(hook.position, hookpoint, hookingSpeed * Time.deltaTime);
+        //if the distance to the hook point is less than...// start the grapling movement
         if (Vector3.Distance(hook.position, hookpoint) < 0.9f)
         {
 
             rb.isKinematic = true;
+            //player goes to the hookposition
             body.position = Vector3.Lerp(body.position, hookpoint, hookingSpeed * Time.deltaTime);
             if (Vector3.Distance(body.position, hookpoint) < dropDist)
             {
@@ -195,13 +149,13 @@ void LockOn()
 
     //after we the body reaches the target's location
     //the grappling stops
+    //hook becomes the hand child's again 
     void ResetAll()
     {
         isGrappling = false;
         rb.isKinematic = false;
         hook.SetParent(handPos);
         hook.localPosition = Vector3.zero;
-        //hook.localRotation = Quaternion.EulerAngles(0, 0, 0);
         lineRender.enabled = false;
     }
 

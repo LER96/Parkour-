@@ -83,7 +83,6 @@ public class PlayerMovement1 : MonoBehaviour
         rb.freezeRotation = true;
         canJump = true;
         lastPos = transform.position;
-        //_startYSale = transform.localScale.y;
     }
     private void Update()
     {
@@ -96,7 +95,6 @@ public class PlayerMovement1 : MonoBehaviour
         animator.SetBool("slide", sliding);
         animator.SetBool("isWallRun", wallRunning);
 
-        //grounded = Physics.Raycast(groundCheck.position, Vector3.down, height, groundMask);
     }
 
     private void FixedUpdate()
@@ -104,10 +102,13 @@ public class PlayerMovement1 : MonoBehaviour
         PlayerMoving();
     }
 
+    //Cast a shepre under the player 
     private void CheckGround()
     {
         grounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
         animator.SetBool("isground", grounded);
+
+        //control the drag of the player while is on the ground
         if (grounded == true)
         {
             rb.drag = groundDrag;
@@ -214,17 +215,6 @@ public class PlayerMovement1 : MonoBehaviour
             //lets you always jump as long as you have the space bar pressed
             Invoke(nameof(JumpReset), jumpCooldown);
         }
-
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    transform.localScale = new Vector3(transform.localScale.x, _startYSale, transform.localScale.z);
-        //    rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-        //}
-        //if (Input.GetKeyUp(KeyCode.C))
-        //{
-        //    transform.localScale = new Vector3(transform.localScale.x, _startYSale, transform.localScale.z);
-
-        //}
     }
 
     private void PlayerMoving()
@@ -330,15 +320,20 @@ public class PlayerMovement1 : MonoBehaviour
         return Vector3.ProjectOnPlane(direction, _slopHit.normal).normalized;
     }
 
+    //get the player distance from the ground // set the animation of jumping/landing 
     private void CheckDist()
     {
         animator.SetBool("isLanding", isLanding);
         animator.SetBool("isJumping", isJumping);
         RaycastHit hit;
+
+        //raycast from the bottom of the player, to check the distance
         if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundMask))
         {
             currentGroundDist = hit.distance;
         }
+        //if the player is in the air
+        //if the player position is farther than the last point// set animation to jumping // else to landing 
         if (saveLastHeight < currentGroundDist && grounded==false)
         {
             saveLastHeight = currentGroundDist;
@@ -358,16 +353,20 @@ public class PlayerMovement1 : MonoBehaviour
         }
     }
 
+    //Check what the player trigger into
     private void OnTriggerEnter(Collider other)
     {
+
         if(other.transform.tag=="Win")
         {
             Debug.Log("winner!");
         }
+        //Spawn to the last position that being saved
         if(other.transform.tag == "Death" || other.transform.tag == "Bullet")
         {
             transform.position = lastPos;
         }
+        //save the last position of the player
         if(other.transform.tag == "CheckPoint")
         {
             lastPos = other.transform.position;

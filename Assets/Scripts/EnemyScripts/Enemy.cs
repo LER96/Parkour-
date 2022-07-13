@@ -33,7 +33,9 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        //check the enemy distance from the player
         distance = Vector3.Distance(lookPoint.position, targert.position);
+        //if the distance is smaller than the radius that we gave him //he is starting to check if the target is on sight 
         if (distance <= radius)
         {
             CheckOnSight();
@@ -42,8 +44,10 @@ public class Enemy : MonoBehaviour
 
     private void CheckOnSight()
     {
+        //set the direction 
         targetDir = (lookPoint.position - targert.position).normalized;
         RaycastHit hit;
+        //shoot a raycast and check if the tay hits the target
         if (!Physics.Raycast(lookPoint.position, targetDir, out hit, distance, isObs, QueryTriggerInteraction.Collide))
         {
             islooking = true;
@@ -59,12 +63,14 @@ public class Enemy : MonoBehaviour
 
     void Shooting()
     {
-        
+        //if the player already attacked// then he waits for a couple of seconds// then shoots 
         if(!attacked)
         {
             attacked = true;
+            //respawn the bulletpreFab
             Instantiate(bullet, shootPoint.position, shootPoint.rotation);
             shootingEffect.Play();
+            //delay and then resets 
             Invoke(nameof(ResetShoot), delay);
         }
     }
@@ -74,7 +80,7 @@ public class Enemy : MonoBehaviour
         attacked = false;
     }
 
-
+    //visible radius
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;

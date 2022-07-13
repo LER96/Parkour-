@@ -90,8 +90,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //sets the time to a more readable visualization
+    //manage the time of the player in the game
     void Stoper()
     {
+
         if (canStartTimer == true)
         {
             timeLeft -= Time.deltaTime;
@@ -99,16 +102,19 @@ public class GameManager : MonoBehaviour
             {
                 var minutes = Mathf.FloorToInt(timeLeft / 60);
                 var seconds = Mathf.FloorToInt(timeLeft % 60);
+                //0
                 if (seconds < 10)
                 {
                     timeUI.text = minutes + ":0" + seconds;
                 }
+                //set 00:00
                 else
                 {
                     timeUI.text = minutes + ":" + seconds;
                 }
                 over = false;
             }
+            //set from 00:00 to 00
             else if (timeLeft < 60 && timeLeft > 0)
             {
                 Debug.Log("test");
@@ -210,7 +216,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadAsync(1));
     }
 
-    //Loading 
+    //Load 
     public IEnumerator LoadAsync(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -234,7 +240,8 @@ public class GameManager : MonoBehaviour
         mainMenuCanvas.SetActive(false);
     }
 
-    //Json
+    //Binary
+    //create a file inside unity, that holds the progress of the player, by the scene index
     public static void BinarySave()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -247,14 +254,11 @@ public class GameManager : MonoBehaviour
         formatter.Serialize(stream, pro);
         stream.Close();
 
-        //JsonProgress progress = new JsonProgress();
-        //int y = SceneManager.GetActiveScene().buildIndex;
-        //progress.level = y;
-        //json = JsonUtility.ToJson(progress);
-        ////File.WriteAllText(Application.persistentDataPath + "/JsonProgress.json", json);
-        //Debug.Log(json);
     }
 
+    //Binary
+    //Takes the file that we created, translated it to readable way
+    //take the index that we saved and send it to the LoadAsync function
     public void BinaryLoad()
     {
         string path = Application.persistentDataPath + "/player.nice";
@@ -272,10 +276,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Not Found" + path);
             //return null;
         }
-        //Progress loadProgress = JsonUtility.FromJson<Progress>(json);
-        //int y = loadProgress.level;
-        //Debug.Log("Loaded");
-        //StartCoroutine(LoadAsync(y));
     }
     
     //restart scene
@@ -334,13 +334,13 @@ public class GameManager : MonoBehaviour
     }
 
 }
+
+//we create a class who holds on the position in the game (progress)
 [System.Serializable]
 public class Progress
 {
     public int level;
 
-    //public Vector3 potision;
-    //public Quaternion rotation;
 }
 
 
