@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
                 isGamePaused = true;
                 mainMenuCanvas.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
                 Time.timeScale = 0;
             }
             //if player presses escape and game is paused, unpause
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
                 mainMenuCanvas.SetActive(false);
                 optionsCanvas.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 Time.timeScale = 1;
             }
         }
@@ -203,6 +205,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         //loads the game with corutine
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         StartCoroutine(LoadAsync(1));
     }
 
@@ -284,6 +288,7 @@ public class GameManager : MonoBehaviour
     //go to next level when you win
     public void NextLvl()
     {
+        Cursor.visible = false;
         StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
@@ -311,6 +316,7 @@ public class GameManager : MonoBehaviour
     {
         if (over== true)
         {
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             loseCanvas.SetActive(true);
             Debug.Log("lose canvas");
@@ -320,6 +326,7 @@ public class GameManager : MonoBehaviour
 
     public void WinScreen()
     {
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         winCanvas.SetActive(true);
         Time.timeScale = 0;
