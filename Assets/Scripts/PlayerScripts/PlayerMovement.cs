@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerMovement1 : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Animator")]
     public Animator animator;
 
     [Header("Movement settings")]
+    public float speedIncreaseMultiplier;
+    public float slopeIncreaseMultiplier;
     [SerializeField] Transform orientation;
     [SerializeField] float _moveSpeed;
     [SerializeField] float acceleration;
@@ -16,18 +18,14 @@ public class PlayerMovement1 : MonoBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float slideSpeed;
     [SerializeField] float wallRunSped;
-
     private float _desiredSpeed;
     private float _lastDesiredSpeed;
-
-    public float speedIncreaseMultiplier;
-    public float slopeIncreaseMultiplier;
 
     [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplayer;
-    bool canJump = true;
+    private bool _canJump = true;
 
     [Header("GroundCheck")]
     public float height;
@@ -35,26 +33,23 @@ public class PlayerMovement1 : MonoBehaviour
     public bool grounded = true;
     public float groundDrag;
     [SerializeField] float groundDist = 0.3f;
-
     [SerializeField] float currentGroundDist;
-    bool isJumping;
-    bool isLanding;
-    float saveLastHeight;
     [SerializeField] Transform groundCheck;
-
+    private bool _isJumping;
+    private bool _isLanding;
+    private float _saveLastHeight;
 
     [Header("SlopeHandling")]
     public float maxSlopAngle;
     private RaycastHit _slopHit;
     private bool _exitingSlop = false;
 
-
     [Header("Save")]
     Vector3 lastPos;
 
     [Header("Inputs")]
-    float horizontalInput;
-    float verticalInput;
+    private float _horizontalInput;
+    private float _verticalInput;
 
     Vector3 moveDirection;
 
@@ -65,7 +60,7 @@ public class PlayerMovement1 : MonoBehaviour
     {
         //to stop the player from falling over 
         rb.freezeRotation = true;
-        canJump = true;
+        _canJump = true;
         lastPos = transform.position;
     }
     private void Update()
@@ -202,13 +197,13 @@ public class PlayerMovement1 : MonoBehaviour
     private void Inputs()
     {
         //player movement
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        _horizontalInput = Input.GetAxis("Horizontal");
+        _verticalInput = Input.GetAxis("Vertical");
 
         //checking when the player can jump
-        if (Input.GetKey(KeyCode.Space) && canJump && grounded)
+        if (Input.GetKey(KeyCode.Space) && _canJump && grounded)
         {
-            canJump = false;
+            _canJump = false;
             Jump();
             //lets you always jump as long as you have the space bar pressed
             Invoke(nameof(JumpReset), jumpCooldown);
@@ -218,7 +213,7 @@ public class PlayerMovement1 : MonoBehaviour
     private void PlayerMoving()
     {
         //calculating the movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
         //animator.SetBool("run", grounded);
 
         //if on slope, increase speed to fit with sprint
@@ -270,7 +265,7 @@ public class PlayerMovement1 : MonoBehaviour
         {
             _moveSpeed = Mathf.Lerp(_moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
         }
-        else if (horizontalInput == 0 && verticalInput == 0)
+        else if (_horizontalInput == 0 && _verticalInput == 0)
         {
             _moveSpeed = 0;
 
@@ -295,7 +290,7 @@ public class PlayerMovement1 : MonoBehaviour
     private void JumpReset()
     {
         //resetting when you can jump
-        canJump = true;
+        _canJump = true;
         _exitingSlop = false;
     }
 
@@ -321,8 +316,8 @@ public class PlayerMovement1 : MonoBehaviour
     //get the player distance from the ground // set the animation of jumping/landing 
     private void CheckDist()
     {
-        animator.SetBool("isLanding", isLanding);
-        animator.SetBool("isJumping", isJumping);
+        animator.SetBool("isLanding", _isLanding);
+        animator.SetBool("isJumping", _isJumping);
         RaycastHit hit;
 
         //raycast from the bottom of the player, to check the distance
@@ -332,22 +327,22 @@ public class PlayerMovement1 : MonoBehaviour
         }
         //if the player is in the air
         //if the player position is farther than the last point// set animation to jumping // else to landing 
-        if (saveLastHeight < currentGroundDist && grounded==false)
+        if (_saveLastHeight < currentGroundDist && grounded==false)
         {
-            saveLastHeight = currentGroundDist;
-            isJumping = true;
-            isLanding = false;
+            _saveLastHeight = currentGroundDist;
+            _isJumping = true;
+            _isLanding = false;
         }
-        else if(saveLastHeight >= currentGroundDist && grounded==false)
+        else if(_saveLastHeight >= currentGroundDist && grounded==false)
         {
-            currentGroundDist = saveLastHeight;
-            isLanding=true;
-            isJumping = false;
+            currentGroundDist = _saveLastHeight;
+            _isLanding=true;
+            _isJumping = false;
         }
         else if(grounded)
         {
-            isLanding = false;
-            isJumping = false;
+            _isLanding = false;
+            _isJumping = false;
         }
     }
 

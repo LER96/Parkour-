@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallRunning1 : MonoBehaviour
+public class WallRunning : MonoBehaviour
 {
     [Header("WallRunning")]
     public LayerMask whatIsWall;
@@ -11,7 +11,6 @@ public class WallRunning1 : MonoBehaviour
     public float maxWallRunTime;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
-    private float _WallRunTimer;
 
     [Header("Inputs")]
     private float horizontalInput;
@@ -27,20 +26,18 @@ public class WallRunning1 : MonoBehaviour
     private bool _wallRight;
 
     [Header("Exiting Wall")]
-    private bool _exitingWall=true;
     public float exitingWallTime;
+    private bool _exitingWall=true;
     private float _exitingWallTimer;
-
 
     [Header("GameReferences")]
     public Transform orientation;
-    private PlayerMovement1 _movementScript;
     [SerializeField] Rigidbody _rb;
+    private PlayerMovement _movementScript;
 
     private void Start()
     {
-        //_rb = GetComponent<Rigidbody>();
-        _movementScript = GetComponent<PlayerMovement1>();
+        _movementScript = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -51,10 +48,9 @@ public class WallRunning1 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if player state is wallrunning, we call wallrun function
         if (_movementScript.wallRunning)
         {
-            wallRunningMovement();
+            WallRunningMovement();
         }
     }
 
@@ -63,8 +59,6 @@ public class WallRunning1 : MonoBehaviour
         //using raycast we check the distance between the player, and the walls
         _wallRight = Physics.Raycast(transform.position, orientation.right, out _rightWallHit, wallCheckDistance, whatIsWall);
         _wallLeft = Physics.Raycast(transform.position, -orientation.right, out _leftWallHit, wallCheckDistance, whatIsWall);
-
-        //Debug.Log($"right:{_wallRight}, left{_wallLeft}");
     }
 
     public bool AbovGround()
@@ -75,11 +69,9 @@ public class WallRunning1 : MonoBehaviour
 
     private void WallRunningState()
     {
-        //inputs
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        //when player can wall run: if wall left or wall right is true, w is pressed and is above ground
         if ((_wallLeft || _wallRight) && verticalInput > 0 && AbovGround() && !_exitingWall)
         {
             if(_wallLeft)
@@ -93,10 +85,9 @@ public class WallRunning1 : MonoBehaviour
                 _movementScript.animator.SetBool("isRight", _wallRight);
             }
 
-            //if you werent wallrunning before, you can wallrun
             if (!_movementScript.wallRunning)
             {
-                startWallRun();
+                StartWallRun();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -105,16 +96,13 @@ public class WallRunning1 : MonoBehaviour
             }
         }
 
-        //if out of wall
         else if (_exitingWall)
         {
-            //if you were wallrunning, stop wall run
             if (_movementScript.wallRunning)
             {
                 StopWallRun();
             }
 
-            //if timer is above 0, countdown
             if (_exitingWallTimer > 0)
             {
                 _exitingWallTimer -= Time.deltaTime;
@@ -137,20 +125,18 @@ public class WallRunning1 : MonoBehaviour
         
     }
 
-    private void startWallRun()
+    private void StartWallRun()
     {
         _movementScript.wallRunning = true;
     }
 
-    private void wallRunningMovement()
+    private void WallRunningMovement()
     {
-        //setting gravity off and velocity to 0
         _rb.useGravity = false;
         _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
 
         //if wall is on the right, use rightwall hit, if not then use leftwall hit
         Vector3 wallNormal = _wallRight ? _rightWallHit.normal : _leftWallHit.normal;
-        //moves upwards
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
         //checks where playr is facing and does the wallrun in the same direction instead of going backwards
@@ -159,13 +145,11 @@ public class WallRunning1 : MonoBehaviour
             wallForward = -wallForward;
         }
 
-        //adding force forward for wallrun
         _rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
         //checks if player is behind a curved wall
         if (!(_wallLeft && horizontalInput > 0) && !(_wallRight && horizontalInput < 0))
         {
-            //pushes player to the wall so they can run on a curved wall from behind 
             _rb.AddForce(-wallNormal * 100, ForceMode.Force);
         }
     }
@@ -176,18 +160,14 @@ public class WallRunning1 : MonoBehaviour
 
     }
 
-    //
     private void WallJump()
     {
         _exitingWall = true;
         _exitingWallTimer = exitingWallTime;
 
-        //if wall is on the right, use rightwall hit, if not then use leftwall hit
         Vector3 wallNormal = _wallRight ? _rightWallHit.normal : _leftWallHit.normal;
-        //how much force you have while wall jumping
         Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
 
-        // resetting velocity and walljump force
         _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
         _rb.AddForce(forceToApply, ForceMode.Impulse);
     }

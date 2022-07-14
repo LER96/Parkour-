@@ -14,7 +14,6 @@ public class PlayerCamMovement : MonoBehaviour
 
     [SerializeField] Texture2D target;
 
-    //[SerializeField] CursorMode mode = CursorMode.Auto;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -22,7 +21,6 @@ public class PlayerCamMovement : MonoBehaviour
 
     private void Update()
     {
-        //Cursor.SetCursor(target, Vector2.zero, mode);
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
         float mousey = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
         yRotation += mouseX;

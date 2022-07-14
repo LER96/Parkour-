@@ -18,7 +18,6 @@ public class Grappling : MonoBehaviour
     bool isShooting;
     bool isGrappling;
 
-
     FieldOfView fow;
     public bool ready;
     [SerializeField] GameObject redCross;
@@ -32,7 +31,6 @@ public class Grappling : MonoBehaviour
     }
     private void Update()
     {
-
         CheckOnSight();
         LockOn();
         if (Input.GetMouseButtonDown((0)))

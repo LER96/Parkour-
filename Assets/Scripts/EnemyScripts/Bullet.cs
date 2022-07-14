@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float timeToDie = 4;
     float time;
-    // Start is called before the first frame update
+
     void Start()
     {
         //set bullet speed
@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +37,4 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject); 
         }
     }
-
-    // Update is called once per frame
 }

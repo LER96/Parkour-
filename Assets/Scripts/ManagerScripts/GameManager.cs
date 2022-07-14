@@ -26,20 +26,19 @@ public class GameManager : MonoBehaviour
     [Header("Consts")]
     const string SAVE_VOLUME = "musicVolume";
     const string SAVE_QUALITY = "qualitySettings";
-    const string ACTIVATION_TAG = "Player";
 
     [Header("Timer")]
     public float timeLeft;
-    [SerializeField] TMP_Text timeUI;
     public bool over = false;
+    [SerializeField] TMP_Text timeUI;
 
     [Header("Bools")]
     public bool playerWon = false;
     public bool canStartTimer = false;
+    public bool isGamePaused = false;
 
     [SerializeField] string json;
 
-    public bool isGamePaused = false;
     Resolution[] resolutions;
 
     private void Start()
@@ -47,12 +46,10 @@ public class GameManager : MonoBehaviour
         int currentResolutionIndex = 0;
         Time.timeScale = 1;
 
-        //getting all possible resolutions 
         resolutions = Screen.resolutions;
         List<string> options = new List<string>();
         for (int i = 0; i < resolutions.Length; i++)
         {
-            //we add the resolutions index into a string so we can see them in dropdown
             string option = resolutions[i].ToString();
             options.Add(option);
 
@@ -138,13 +135,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //pause option
     public void Pause()
     {
-        //if scene isnt main menu, and player didnt win/lose, you can pause
         if (SceneManager.GetActiveScene().buildIndex != 0 && over == false && playerWon == false)
         {
-            //if player presses escape and game isnt paused, pause
             if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == false)
             {
                 isGamePaused = true;
@@ -153,7 +147,6 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
                 Time.timeScale = 0;
             }
-            //if player presses escape and game is paused, unpause
             else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused == true)
             {
                 isGamePaused = false;
@@ -173,20 +166,17 @@ public class GameManager : MonoBehaviour
         qualityDropdown.value = PlayerPrefs.GetInt(SAVE_QUALITY);
     }
 
-    //Saves values of what the user inputed
     public void SaveSettings()
     {
         PlayerPrefs.SetFloat(SAVE_VOLUME, volumeSlider.value);
         PlayerPrefs.SetInt(SAVE_QUALITY, qualityDropdown.value);
     }
 
-    //general volume control
     public void SetVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
 
-    //choosing resolution for the game
     public void SetResolution(int resolutionIndex)
     {
         //gets the index of the drop down and puts all the possible resolution
@@ -194,34 +184,29 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    //setting quality
     public void SetQuality(int index)
     {
-        //takes the index of the dropdown in unity
         QualitySettings.SetQualityLevel(index);
     }
 
-    //quit button
     public void QuitGame()
     {
         Application.Quit();
     }
-    //option to choose tutorial
+
     public void Tutorial()
     {
-        //loads to tutorial with the corutine
         StartCoroutine(LoadAsync(3));
     }
     
     public void StartGame()
     {
-        //loads the game with corutine
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         StartCoroutine(LoadAsync(1));
     }
 
-    //Load 
+    //Loading scenes 
     public IEnumerator LoadAsync(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -238,14 +223,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //options menu
     public void Options()
     {
         optionsCanvas.SetActive(true);
         mainMenuCanvas.SetActive(false);
     }
 
-    //Binary
     //create a file inside unity, that holds the progress of the player, by the scene index
     public static void BinarySave()
     {
@@ -261,7 +244,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //Binary
     //Takes the file that we created, translated it to readable way
     //take the index that we saved and send it to the LoadAsync function
     public void BinaryLoad()
@@ -279,44 +261,37 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.LogError("Not Found" + path);
-            //return null;
         }
     }
     
-    //restart scene
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
 
-    //go to next level when you win
     public void NextLvl()
     {
         Cursor.visible = false;
         StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
-    //go back to main menu
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
     }
 
-    //back button from options
     public void Back()
     {
         optionsCanvas.SetActive(false);
         mainMenuCanvas.SetActive(true);
     }
 
-    //set game to full screen
     public void FullScreen(bool isFullScreenOn)
     {
         Screen.fullScreen = isFullScreenOn;
     }
 
-    //Win/Lose
     public void LoseScreen()
     {
         if (over== true)

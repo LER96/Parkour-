@@ -10,7 +10,7 @@ public class CutsceneHandler : MonoBehaviour
     [Header("GameObjects")]
    
     [SerializeField] PlayableDirector cutscene;
-    [SerializeField] private double _skipIntro = 40f;
+    [SerializeField] double _skipIntro = 40f;
     [SerializeField] GameObject cutsceneCamera;
     [SerializeField] GameObject secondCutsceneCamera;
     [SerializeField] GameObject mainCamera;
@@ -19,7 +19,7 @@ public class CutsceneHandler : MonoBehaviour
     [SerializeField] GameObject enemies;
 
     [Header("References")]
-    private PlayerMovement1 _player;
+    private PlayerMovement _player;
     private PlayerCamMovement _playerCam;
     private GameManager _gameManager;
 
@@ -30,7 +30,7 @@ public class CutsceneHandler : MonoBehaviour
     {
         skipIntroText.text = "Press F to skip";
         //getting references for player and cam to deactivate them
-        _player = playerReference.GetComponent<PlayerMovement1>();
+        _player = playerReference.GetComponent<PlayerMovement>();
         _playerCam = mainCamera.GetComponent<PlayerCamMovement>();
         _gameManager = gameManagerReference.GetComponent<GameManager>();
         cutscene = GetComponent<PlayableDirector>();
@@ -61,7 +61,6 @@ public class CutsceneHandler : MonoBehaviour
             _player.animator.enabled = true;
             cutsceneCamera.SetActive(false);
             _playerCam.enabled = true;
-            Debug.Log("done");
             skipIntroText.enabled = false;
             _gameManager.canStartTimer = true;
             enemies.SetActive(true);
