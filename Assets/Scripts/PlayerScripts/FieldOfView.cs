@@ -17,7 +17,6 @@ public class FieldOfView : MonoBehaviour
 
     public List<Transform> visibleTargets = new List<Transform>();
 
-    //To manage drop some code on each frame, we start the script with a coountine
     private void Start()
     {
         StartCoroutine("FindTargets", delay);
@@ -41,19 +40,16 @@ public class FieldOfView : MonoBehaviour
         for(int i=0; i< targetsInFieldView.Length; i++)
         {
             Transform target = targetsInFieldView[i].transform;
-            //sets the dirrection of the player to the target
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             //gets the location of the target, that enerted the camera view
             Vector3 targetPos = Camera.main.WorldToViewportPoint(target.position);
             //if the position is on the middle of the camera view// that means the player is looking right at it
             if (targetPos.z > 0 && targetPos.z < distanceToGrap && targetPos.x > 0.35f && targetPos.x < 0.65f && targetPos.y > 0 && targetPos.y < 1)
             {
-                //check the distance
                 float distTarget = Vector3.Distance(transform.position, target.position);
                 //cast a ray that make sure that the target is not hiding behind anything
                 if(!Physics.Raycast(transform.position, dirToTarget, distTarget, obsMask))
                 {
-                    //add to the targets list
                     visibleTargets.Add(target);
                 }
             }

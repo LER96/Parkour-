@@ -33,9 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        //check the enemy distance from the player
         distance = Vector3.Distance(lookPoint.position, targert.position);
-        //if the distance is smaller than the radius that we gave him //he is starting to check if the target is on sight 
         if (distance <= radius)
         {
             CheckOnSight();

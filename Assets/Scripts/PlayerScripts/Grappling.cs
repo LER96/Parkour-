@@ -53,7 +53,7 @@ public class Grappling : MonoBehaviour
     }
     private void LateUpdate()
     {
-        //draw the line
+        //draw the rope from the handposition to the hook
         if(lineRender.enabled)
         {
             lineRender.SetPosition(0, hookend.position);
@@ -103,12 +103,11 @@ public class Grappling : MonoBehaviour
     //check if we hit the grappling point
     void ShootHook()
     {
-        // if one of them is true
         if (isShooting || isGrappling) return;
 
-        //if not// the player is ready to shoot again
         isShooting = true;
-        //if the player is looking at the target// then we're ready to shoot
+
+        //if the player is looking at the target
         if (ready)
         {
             //hookpoint is the hook last position
@@ -130,6 +129,7 @@ public class Grappling : MonoBehaviour
     {
         //create a smooth transition of the hook to the hookpoint 
         hook.position = Vector3.Lerp(hook.position, hookpoint, hookingSpeed * Time.deltaTime);
+
         //if the distance to the hook point is less than...// start the grapling movement
         if (Vector3.Distance(hook.position, hookpoint) < 0.9f)
         {
@@ -143,7 +143,7 @@ public class Grappling : MonoBehaviour
         }
     }
 
-    //after we the body reaches the target's location
+    //after the body reaches the target's location
     //the grappling stops
     //hook becomes the hand child's again 
     void ResetAll()
