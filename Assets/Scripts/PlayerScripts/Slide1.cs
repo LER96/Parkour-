@@ -68,7 +68,6 @@ public class Slide1 : MonoBehaviour
         col.enabled = false;
         slideCol.enabled = true;
         _movement.sliding = true;
-        //playerObj.localScale = new Vector3(playerObj.localScale.x, playerObj.localScale.y, playerObj.localScale.z);
         _rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         _slideTimer = maxSlideTime;
@@ -103,6 +102,5 @@ public class Slide1 : MonoBehaviour
         col.enabled = true;
         slideCol.enabled = false;
         _movement.sliding = false;
-        //playerObj.localScale = new Vector3(playerObj.localScale.x, _startYScale, playerObj.localScale.z);
     }
 }

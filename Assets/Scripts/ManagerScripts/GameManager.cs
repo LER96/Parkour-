@@ -47,22 +47,27 @@ public class GameManager : MonoBehaviour
         int currentResolutionIndex = 0;
         Time.timeScale = 1;
 
+        //getting all possible resolutions 
         resolutions = Screen.resolutions;
         List<string> options = new List<string>();
         for (int i = 0; i < resolutions.Length; i++)
         {
+            //we add the resolutions index into a string so we can see them in dropdown
             string option = resolutions[i].ToString();
             options.Add(option);
 
+            //if the resolution from list is the same as our current screen resolution then we say current resolution is i (from list)
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
         }
+        //we add the list into dropdown, then the values are the current resolution index we got from earlier
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
 
+        //checks if the player never changed quality and volume yet, then sets those as default
         if (!PlayerPrefs.HasKey(SAVE_VOLUME))
         {
             PlayerPrefs.SetFloat(SAVE_VOLUME, 1);

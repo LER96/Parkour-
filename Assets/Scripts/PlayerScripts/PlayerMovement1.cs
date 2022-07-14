@@ -61,22 +61,6 @@ public class PlayerMovement1 : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     public MovementState state;
-
-    //storing the states the player is at 
-    public enum MovementState
-    {
-        walking,
-        sprinting,
-        crouching,
-        air,
-        sliding,
-        wallRunning,
-    }
-
-
-    public bool sliding;
-    public bool wallRunning;
-
     private void Start()
     {
         //to stop the player from falling over 
@@ -102,7 +86,7 @@ public class PlayerMovement1 : MonoBehaviour
         PlayerMoving();
     }
 
-    //Cast a shepre under the player 
+    //Cast a sphere under the player 
     private void CheckGround()
     {
         grounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
@@ -118,6 +102,20 @@ public class PlayerMovement1 : MonoBehaviour
             rb.drag = 0;
         }
     }
+
+    //storing the states the player is at 
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        crouching,
+        air,
+        sliding,
+        wallRunning,
+    }
+
+    public bool sliding;
+    public bool wallRunning;
 
     private void StateHandler()
     {

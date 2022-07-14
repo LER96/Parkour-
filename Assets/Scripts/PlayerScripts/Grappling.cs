@@ -83,9 +83,7 @@ public class Grappling : MonoBehaviour
         }
     }
 
-
-
-void LockOn()
+    void LockOn()
     {
         //set the target icon onto the target position
         if(grapOnSight.Count>0)
@@ -101,7 +99,6 @@ void LockOn()
             ready = false;
         }
     }
-
 
     //check if we hit the grappling point
     void ShootHook()
@@ -136,7 +133,6 @@ void LockOn()
         //if the distance to the hook point is less than...// start the grapling movement
         if (Vector3.Distance(hook.position, hookpoint) < 0.9f)
         {
-
             rb.isKinematic = true;
             //player goes to the hookposition
             body.position = Vector3.Lerp(body.position, hookpoint, hookingSpeed * Time.deltaTime);

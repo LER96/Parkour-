@@ -33,11 +33,11 @@ public class CutsceneHandler : MonoBehaviour
         _player = playerReference.GetComponent<PlayerMovement1>();
         _playerCam = mainCamera.GetComponent<PlayerCamMovement>();
         _gameManager = gameManagerReference.GetComponent<GameManager>();
+        cutscene = GetComponent<PlayableDirector>();
         enemies.SetActive(false);
         _player.enabled = false;
         _player.animator.enabled = false;
         _playerCam.enabled = false;
-        cutscene = GetComponent<PlayableDirector>();
     }
 
     private void Update()
